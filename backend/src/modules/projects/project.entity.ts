@@ -1,5 +1,3 @@
-// src/modules/project/entities/project.entity.ts
-
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -11,7 +9,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { User } from '../users/user.entity';
-// import { Task } from '../tasks/task.entity';
+import { Task } from '../tasks/task.entity';
 
 @Entity('projects')
 export class Project {
@@ -31,8 +29,8 @@ export class Project {
   @JoinColumn({ name: 'ownerId' })
   owner: User;
 
-  //   @OneToMany(() => Task, (task) => task.project)
-  //   tasks: Task[];
+  @OneToMany(() => Task, (task) => task.project)
+  tasks: Task[];
 
   @CreateDateColumn()
   createdAt: Date;

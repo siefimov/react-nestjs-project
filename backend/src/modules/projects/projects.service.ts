@@ -43,7 +43,7 @@ export class ProjectsService {
     const result = await this.projectsRepository.delete({ id });
 
     if (result.affected === 0) {
-      throw new NotFoundException(`User with ID ${id} not found`);
+      throw new NotFoundException(`Project with ID ${id} not found`);
     }
   }
 }
