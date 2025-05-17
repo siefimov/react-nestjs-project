@@ -7,6 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Project } from '../projects/project.entity';
+import { Task } from '../tasks/task.entity';
 
 @Entity('users')
 export class User {
@@ -21,6 +22,9 @@ export class User {
 
   @OneToMany(() => Project, (project) => project.owner)
   projects: Project[];
+
+  @OneToMany(() => Task, (task) => task.assignedUser)
+  tasks: Task[];
 
   @CreateDateColumn()
   createdAt: Date;
