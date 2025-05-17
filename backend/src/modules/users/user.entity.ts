@@ -1,4 +1,12 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  OneToMany,
+  CreateDateColumn,
+  UpdateDateColumn,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Project } from '../projects/project.entity';
 
 @Entity('users')
 export class User {
@@ -10,4 +18,13 @@ export class User {
 
   @Column({ unique: true })
   email: string;
+
+  @OneToMany(() => Project, (project) => project.owner)
+  projects: Project[];
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 }
