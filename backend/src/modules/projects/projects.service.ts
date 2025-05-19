@@ -18,7 +18,9 @@ export class ProjectsService {
   }
 
   async findAll(): Promise<Project[]> {
-    return this.projectsRepository.find();
+    return this.projectsRepository.find({
+      relations: ['owner'],
+    });
   }
 
   async findOne(id: number): Promise<Project> {
