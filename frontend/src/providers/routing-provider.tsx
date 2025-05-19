@@ -6,7 +6,7 @@ import {
 } from 'react-router';
 import { AppLayout } from '../components/app-layout';
 import { Projects, Project } from '../views';
-import { APP_ROUTES } from '../enums';
+import { APP_ROUTES } from '../constants';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
