@@ -46,6 +46,7 @@ export const ProjectList: React.FC<Props> = ({ projects }) => {
             <th>Title</th>
             <th>Description</th>
             <th>Owner</th>
+            <th>Owner ID</th>
             <th>Project details</th>
             <th>Created</th>
             <th>Action</th>
@@ -58,7 +59,8 @@ export const ProjectList: React.FC<Props> = ({ projects }) => {
                 <td>{i + 1}</td>
                 <td>{project.title}</td>
                 <td>{project.description}</td>
-                <td>{project.owner.name}</td>
+                <td>{project.owner?.name ?? '-'}</td>
+                <td>{project.owner?.id ?? '-'}</td>
                 <td>
                   <Link to={APP_ROUTES.PROJECT(project.id)}>
                     project details
