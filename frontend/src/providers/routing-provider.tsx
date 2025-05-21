@@ -5,7 +5,7 @@ import {
   RouterProvider,
 } from 'react-router';
 import { AppLayout } from '../components/app-layout';
-import { Projects, Project } from '../views';
+import { Projects, Project, CreateProject } from '../views';
 import { APP_ROUTES } from '../constants';
 
 const router = createBrowserRouter(
@@ -13,14 +13,8 @@ const router = createBrowserRouter(
     <Route element={<AppLayout />}>
       <Route index element={<Projects />} />
       <Route path={APP_ROUTES.PROJECT(':id')} element={<Project />} />
-      <Route
-        path={APP_ROUTES.CREATE}
-        element={<div>Create Project Form</div>}
-      />
-      <Route
-        path={APP_ROUTES.EDIT(':id')}
-        element={<div>Edit Project Form</div>}
-      />
+      <Route path={APP_ROUTES.CREATE} element={<CreateProject />} />
+      <Route path={APP_ROUTES.EDIT(':id')} element={<div>Edit Project</div>} />
       <Route path="*" element={<div>Not Found Page</div>} />
     </Route>,
   ),
