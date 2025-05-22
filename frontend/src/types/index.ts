@@ -3,6 +3,7 @@ export {
   type CreateProjectRequestDto,
   type CreateProjectResponseDto,
   type UpdateProjectRequestDto,
+  type UpdateProjectResponseDto,
   type EditableProjectField,
   type NewProjectFormValues,
   type Project,
