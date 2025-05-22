@@ -6,4 +6,3 @@ export const createProjectSchema = z.object({
   ownerId: z.number().min(1, 'Owner ID is required'),
 });
 
-export type CreateProjectFormValues = z.infer<typeof createProjectSchema>;

@@ -1,6 +1,5 @@
 import type { Project } from './project.type';
 
-export type CreateProjectRequestDto = Pick<
-  Project,
-  'title' | 'description' | 'ownerId'
+export type CreateProjectRequestDto = Partial<
+  Pick<Project, 'title' | 'description' | 'ownerId'>
 >;
