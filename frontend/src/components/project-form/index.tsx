@@ -2,11 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  createProjectSchema,
-  type NewProjectFormValues,
-  type CreateProjectRequestDto,
-} from '../../types';
+import { createProjectSchema, type NewProjectFormValues } from '../../types';
 import { APP_ROUTES } from '../../constants';
 
 type Props = {
@@ -20,7 +16,7 @@ export const ProjectForm: React.FC<Props> = ({ onSubmit }) => {
     formState: { errors, isSubmitting },
     setFocus,
     reset,
-  } = useForm<CreateProjectRequestDto>({
+  } = useForm<NewProjectFormValues>({
     resolver: zodResolver(createProjectSchema),
   });
 
