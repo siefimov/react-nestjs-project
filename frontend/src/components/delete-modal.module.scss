@@ -1,0 +1,51 @@
+@import '../styles/_variables.scss';
+
+.delete-modal__backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(30, 41, 59, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.delete-modal__content {
+  background: $color-bg-alt;
+  padding: $spacing-md;
+  border-radius: $radius;
+  min-width: 320px;
+  text-align: center;
+  box-shadow: 0 2px 16px 0 rgba(30, 41, 59, 0.1);
+}
+
+.delete-modal__title {
+  color: $color-danger;
+  margin-bottom: $spacing-xs;
+}
+
+.delete-modal__actions {
+  margin-top: $spacing-sm;
+  display: flex;
+  gap: $spacing-sm;
+  justify-content: center;
+}
+
+.delete-modal__cancel {
+  background: $color-border;
+  color: $color-text;
+  &:hover {
+    background: $color-bg;
+  }
+}
+
+.delete-modal__delete {
+  background: $color-danger;
+  color: #fff;
+  &:hover {
+    background: darken($color-danger, 10%);
+  }
+}

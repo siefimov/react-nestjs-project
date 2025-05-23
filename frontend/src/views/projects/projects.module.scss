@@ -1,0 +1,31 @@
+@import '../../styles/_variables.scss';
+
+.projects-page {
+  margin: $spacing-md auto;
+  max-width: 900px;
+}
+
+.projects-page__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-sm;
+}
+
+.projects-page__title {
+  font-size: $font-size-lg;
+  color: $color-primary;
+}
+
+.projects-page__new-link {
+  background: $color-accent;
+  color: #fff;
+  border-radius: $radius;
+  padding: 0.4em 1em;
+  font-weight: 500;
+  transition: background $transition;
+  &:hover {
+    background: $color-primary;
+    color: #fff;
+  }
+}

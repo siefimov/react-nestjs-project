@@ -1,0 +1,17 @@
+@import '../styles/_variables.scss';
+
+.app-layout {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: $spacing-md $spacing-sm;
+  background: $color-bg-alt;
+  border-radius: $radius;
+  box-shadow: 0 2px 12px 0 rgba(30, 41, 59, 0.06);
+  min-height: 80vh;
+}
+
+.app-layout__title {
+  margin-bottom: $spacing-md;
+  font-size: 2rem;
+  text-align: center;
+}

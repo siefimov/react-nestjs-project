@@ -1,0 +1,17 @@
+@import '../../styles/_variables.scss';
+
+.project-page {
+  background: $color-bg-alt;
+  border-radius: $radius;
+  box-shadow: 0 1px 4px 0 rgba(30, 41, 59, 0.04);
+  padding: $spacing-md $spacing-sm;
+  max-width: 500px;
+  margin: $spacing-md auto;
+}
+
+.project-page__field {
+  margin-bottom: $spacing-sm;
+  color: $color-text;
+  font-size: $font-size-base;
+  word-break: break-word;
+}
