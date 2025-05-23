@@ -1,0 +1,48 @@
+@import '../../styles/_variables.scss';
+
+.project-form {
+  background: $color-bg-alt;
+  border-radius: $radius;
+  box-shadow: 0 1px 4px 0 rgba(30, 41, 59, 0.04);
+  padding: $spacing-md $spacing-sm;
+  max-width: 500px;
+  margin: $spacing-md auto;
+}
+
+.project-form__field {
+  margin-bottom: $spacing-sm;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+}
+
+.project-form__label {
+  font-weight: 500;
+  color: $color-text-light;
+}
+
+.project-form__input,
+.project-form__textarea {
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  padding: $spacing-xs;
+  font-size: $font-size-base;
+  background: $color-bg;
+  color: $color-text;
+  transition: border $transition;
+  &:focus {
+    border-color: $color-primary;
+    outline: none;
+  }
+}
+
+.project-form__error {
+  color: $color-danger;
+  font-size: $font-size-sm;
+}
+
+.project-form__actions {
+  display: flex;
+  gap: $spacing-sm;
+  margin-top: $spacing-sm;
+}
