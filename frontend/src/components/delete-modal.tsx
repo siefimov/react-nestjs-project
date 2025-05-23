@@ -1,3 +1,5 @@
+import styles from './delete-modal.module.scss';
+
 type Props = {
   id: number;
   isModalOpen: boolean;
@@ -16,45 +18,24 @@ export const DeleteModal: React.FC<Props> = ({
   if (!isModalOpen) return null;
 
   return (
-    <div
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        background: 'rgba(0,0,0,0.3)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 1000,
-      }}
-    >
-      <div
-        style={{
-          background: '#fff',
-          padding: '2rem',
-          borderRadius: '8px',
-          minWidth: '300px',
-          textAlign: 'center',
-        }}
-      >
-        <h3>Delete Project</h3>
+    <div className={styles['delete-modal__backdrop']}>
+      <div className={styles['delete-modal__content']}>
+        <h3 className={styles['delete-modal__title']}>Delete Project</h3>
         <p>
           Are you sure you want to delete project with id <b>{id}</b>?
         </p>
-        <div style={{ marginTop: '1rem' }}>
+        <div className={styles['delete-modal__actions']}>
           <button
             onClick={cancelAction}
             disabled={isLoading}
-            style={{ marginRight: '1rem' }}
+            className={styles['delete-modal__cancel']}
           >
             Cancel
           </button>
           <button
             onClick={() => deleteAction(id)}
             disabled={isLoading}
-            style={{ background: 'red', color: '#fff' }}
+            className={styles['delete-modal__delete']}
           >
             {isLoading ? 'Deleting...' : 'Delete'}
           </button>
