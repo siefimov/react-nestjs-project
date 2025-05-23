@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
-import type { Project, EditableProjectField } from '../../types';
+import type { EditableProjectField } from '../../types';
 import { APP_ROUTES, EDITABLE_PROJECT_FIELDS } from '../../constants';
 import { AiOutlineDelete, AiOutlineEdit } from '../icons';
 import { getFormattedDate } from '../../utils';
@@ -8,9 +8,10 @@ import { useDeleteProject, useEditProject } from '../../api';
 import { DeleteModal } from '../delete-modal';
 import { ProjectFieldInlineEdit } from './project-filed-inline-edit';
 import styles from './project-list.module.scss';
+import type { ProjectWithOwner } from '../../schemas';
 
 type Props = {
-  projects: Project[];
+  projects: ProjectWithOwner[];
 };
 
 type EditingState = {
@@ -47,7 +48,7 @@ export const ProjectList: React.FC<Props> = ({ projects }) => {
   };
 
   const handleEditClick = (
-    project: Project,
+    project: ProjectWithOwner,
     field: 'title' | 'description',
   ) => {
     setEditing({
@@ -61,7 +62,7 @@ export const ProjectList: React.FC<Props> = ({ projects }) => {
     setEditing(prev => ({ ...prev, value: e.target.value }));
   };
 
-  const handleEditSubmit = (project: Project) => {
+  const handleEditSubmit = (project: ProjectWithOwner) => {
     if (
       editing.id === project.id &&
       editing.field &&
@@ -100,7 +101,7 @@ export const ProjectList: React.FC<Props> = ({ projects }) => {
           </thead>
           <tbody>
             {projects &&
-              projects.map((project: Project, i) => (
+              projects.map((project: ProjectWithOwner, i) => (
                 <tr key={project.id}>
                   <td>{i + 1}</td>
                   <td>
