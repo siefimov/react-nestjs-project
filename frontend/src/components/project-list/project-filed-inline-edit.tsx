@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './project-filed-inline-edit.module.scss';
 
 type Props = {
   value: string | null | undefined;
@@ -31,23 +32,21 @@ export const ProjectFieldInlineEdit: React.FC<Props> = ({
       autoFocus
       aria-label={ariaLabel}
       placeholder={placeholder}
+      className={styles['project-field-inline-edit__input']}
     />
   ) : (
     <span
       onDoubleClick={onStartEdit}
       role="button"
       aria-label={ariaLabel}
-      style={{
-        minHeight: 20,
-        display: 'inline-block',
-        minWidth: 40,
-        cursor: 'pointer',
-      }}
+      className={styles['project-field-inline-edit']}
     >
       {value?.trim() ? (
         value
       ) : (
-        <i style={{ color: '#aaa' }}>{placeholder ?? 'add value...'}</i>
+        <i className={styles['project-field-inline-edit__placeholder']}>
+          {placeholder ?? 'add value...'}
+        </i>
       )}
     </span>
   );
