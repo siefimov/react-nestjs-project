@@ -7,9 +7,9 @@
   cursor: pointer;
   padding: 0.1em 0.3em;
   border-radius: $radius;
-  transition: background $transition;
+  transition: background-color $transition;
   &:hover {
-    background: $color-bg;
+    background-color: $color-bg;
   }
 }
 
@@ -18,7 +18,7 @@
   padding: 0.1em 0.3em;
   border: 1px solid $color-border;
   border-radius: $radius;
-  background: $color-bg-alt;
+  background-color: $color-bg-alt;
   color: $color-text;
   font-size: $font-size-base;
   transition: border $transition;

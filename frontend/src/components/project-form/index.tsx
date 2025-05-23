@@ -2,12 +2,13 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { createProjectSchema, type NewProjectFormValues } from '../../types';
+// import { createProjectSchema, type NewProjectFormValues } from '../../types';
 import { APP_ROUTES } from '../../constants';
 import styles from './project-form.module.scss';
+import { type ProjectCreateDto, ProjectCreateSchema } from '../../schemas';
 
 type Props = {
-  onSubmit: (data: NewProjectFormValues) => void;
+  onSubmit: (data: ProjectCreateDto) => void;
 };
 
 export const ProjectForm: React.FC<Props> = ({ onSubmit }) => {
@@ -17,8 +18,8 @@ export const ProjectForm: React.FC<Props> = ({ onSubmit }) => {
     formState: { errors, isSubmitting },
     setFocus,
     reset,
-  } = useForm<NewProjectFormValues>({
-    resolver: zodResolver(createProjectSchema),
+  } = useForm<ProjectCreateDto>({
+    resolver: zodResolver(ProjectCreateSchema),
   });
 
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ export const ProjectForm: React.FC<Props> = ({ onSubmit }) => {
     setFocus('title');
   }, [setFocus]);
 
-  const handleFormSubmit = (data: NewProjectFormValues) => {
+  const handleFormSubmit = (data: ProjectCreateDto) => {
     onSubmit(data);
     reset();
     setFocus('title');
@@ -42,11 +43,7 @@ export const ProjectForm: React.FC<Props> = ({ onSubmit }) => {
         <label className={styles['project-form__label']}>Title</label>
         <input
           className={styles['project-form__input']}
-          {...register('title', {
-            required: 'Title is required',
-            minLength: 1,
-            maxLength: 100,
-          })}
+          {...register('title')}
         />
         {errors.title && (
           <span className={styles['project-form__error']}>
@@ -66,11 +63,7 @@ export const ProjectForm: React.FC<Props> = ({ onSubmit }) => {
         <input
           type="number"
           className={styles['project-form__input']}
-          {...register('ownerId', {
-            required: 'Owner ID is required',
-            min: 1,
-            valueAsNumber: true,
-          })}
+          {...register('ownerId')}
         />
         {errors.ownerId && (
           <span className={styles['project-form__error']}>

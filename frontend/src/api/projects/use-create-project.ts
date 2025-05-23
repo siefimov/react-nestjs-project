@@ -1,18 +1,21 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import type {
-  CreateProjectRequestDto,
-  CreateProjectResponseDto,
-  Project,
-} from '../../types';
+// import type {
+//   CreateProjectRequestDto,
+//   CreateProjectResponseDto,
+//   Project,
+// } from '../../types';
+import {
+  type ProjectCreateDto,
+  type ProjectResponseDto,
+  type ProjectWithOwner,
+  ProjectCreateSchema,
+} from '../../schemas';
 import { http } from '../http';
 import { projectQueryKeys } from './project-query-keys';
 
-const createProjectFn = async (newPropect: CreateProjectRequestDto) => {
-  const response = await http.post<CreateProjectResponseDto>(
-    '/projects',
-    newPropect,
-  );
-  return response;
+const createProjectFn = async (newPropect: ProjectCreateDto) => {
+  const response = await http.post<ProjectResponseDto>('/projects', newPropect);
+  return ProjectCreateSchema.parse(response);
 };
 
 export const useCreateProject = () => {
@@ -24,16 +27,19 @@ export const useCreateProject = () => {
       await queryClient.cancelQueries({ queryKey: projectQueryKeys.all });
       const previousProjects = queryClient.getQueryData(projectQueryKeys.all);
 
-      queryClient.setQueryData(projectQueryKeys.all, (old: Project[] = []) => [
-        ...old,
-        {
-          id: Date.now(),
-          ...newProject,
-          owner: null,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-        },
-      ]);
+      queryClient.setQueryData(
+        projectQueryKeys.all,
+        (old: ProjectWithOwner[] = []) => [
+          ...old,
+          {
+            id: Date.now(),
+            ...newProject,
+            owner: null,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+          },
+        ],
+      );
 
       return { previousProjects };
     },
