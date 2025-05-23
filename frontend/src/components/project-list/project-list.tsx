@@ -7,6 +7,7 @@ import { getFormattedDate } from '../../utils';
 import { useDeleteProject, useEditProject } from '../../api';
 import { DeleteModal } from '../delete-modal';
 import { ProjectFieldInlineEdit } from './project-filed-inline-edit';
+import styles from './project-list.module.scss';
 
 type Props = {
   projects: Project[];
@@ -83,89 +84,104 @@ export const ProjectList: React.FC<Props> = ({ projects }) => {
         isLoading={deleteProjectMutation.isPending}
         isModalOpen={isModalOpen}
       />
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Owner</th>
-            <th>Owner ID</th>
-            <th>Project details</th>
-            <th>Created</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {projects &&
-            projects.map((project: Project, i) => (
-              <tr key={project.id}>
-                <td>{i + 1}</td>
-                <td>
-                  <ProjectFieldInlineEdit
-                    value={project.title}
-                    isEditing={
-                      editing.id === project.id &&
-                      editing.field === EDITABLE_PROJECT_FIELDS.TITLE
-                    }
-                    onStartEdit={() =>
-                      handleEditClick(project, EDITABLE_PROJECT_FIELDS.TITLE)
-                    }
-                    onChange={handleEditChange}
-                    onBlur={() => handleEditSubmit(project)}
-                    onKeyDown={e => {
-                      if (e.key === 'Enter') handleEditSubmit(project);
-                      if (e.key === 'Escape')
-                        setEditing({ id: null, field: null, value: '' });
-                    }}
-                    ariaLabel="Edit project title"
-                    placeholder="add title..."
-                  />
-                </td>
-                <td>
-                  <ProjectFieldInlineEdit
-                    value={project.description}
-                    isEditing={
-                      editing.id === project.id &&
-                      editing.field === EDITABLE_PROJECT_FIELDS.DESCRIPTION
-                    }
-                    onStartEdit={() =>
-                      handleEditClick(
-                        project,
-                        EDITABLE_PROJECT_FIELDS.DESCRIPTION,
-                      )
-                    }
-                    onChange={handleEditChange}
-                    onBlur={() => handleEditSubmit(project)}
-                    onKeyDown={e => {
-                      if (e.key === 'Enter') handleEditSubmit(project);
-                      if (e.key === 'Escape')
-                        setEditing({ id: null, field: null, value: '' });
-                    }}
-                    ariaLabel="Edit project description"
-                    placeholder="add description..."
-                  />
-                </td>
-                <td>{project.owner?.name ?? '-'}</td>
-                <td>{project.owner?.id ?? '-'}</td>
-                <td>
-                  <Link to={APP_ROUTES.PROJECT(project.id)}>
-                    project details
-                  </Link>
-                </td>
-                <td>{getFormattedDate(project.createdAt)}</td>
-                <td>
-                  <Link to={APP_ROUTES.EDIT(project.id)}>
-                    <AiOutlineEdit />
-                  </Link>
-                  <button onClick={() => showDeleteModal(project.id)}>
-                    <AiOutlineDelete />
-                  </button>
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+      <div className={styles['project-list']}>
+        <table className={styles['project-list__table']}>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Owner</th>
+              <th>Owner ID</th>
+              <th>Project details</th>
+              <th>Created</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {projects &&
+              projects.map((project: Project, i) => (
+                <tr key={project.id}>
+                  <td>{i + 1}</td>
+                  <td>
+                    <ProjectFieldInlineEdit
+                      value={project.title}
+                      isEditing={
+                        editing.id === project.id &&
+                        editing.field === EDITABLE_PROJECT_FIELDS.TITLE
+                      }
+                      onStartEdit={() =>
+                        handleEditClick(project, EDITABLE_PROJECT_FIELDS.TITLE)
+                      }
+                      onChange={handleEditChange}
+                      onBlur={() => handleEditSubmit(project)}
+                      onKeyDown={e => {
+                        if (e.key === 'Enter') handleEditSubmit(project);
+                        if (e.key === 'Escape')
+                          setEditing({ id: null, field: null, value: '' });
+                      }}
+                      ariaLabel="Edit project title"
+                      placeholder="add title..."
+                    />
+                  </td>
+                  <td>
+                    <ProjectFieldInlineEdit
+                      value={project.description}
+                      isEditing={
+                        editing.id === project.id &&
+                        editing.field === EDITABLE_PROJECT_FIELDS.DESCRIPTION
+                      }
+                      onStartEdit={() =>
+                        handleEditClick(
+                          project,
+                          EDITABLE_PROJECT_FIELDS.DESCRIPTION,
+                        )
+                      }
+                      onChange={handleEditChange}
+                      onBlur={() => handleEditSubmit(project)}
+                      onKeyDown={e => {
+                        if (e.key === 'Enter') handleEditSubmit(project);
+                        if (e.key === 'Escape')
+                          setEditing({ id: null, field: null, value: '' });
+                      }}
+                      ariaLabel="Edit project description"
+                      placeholder="add description..."
+                    />
+                  </td>
+                  <td>{project.owner?.name ?? '-'}</td>
+                  <td>{project.owner?.id ?? '-'}</td>
+                  <td>
+                    <Link
+                      to={APP_ROUTES.PROJECT(project.id)}
+                      className={styles['project-list__link']}
+                    >
+                      project details
+                    </Link>
+                  </td>
+                  <td>{getFormattedDate(project.createdAt)}</td>
+                  <td>
+                    <span className={styles['project-list__actions']}>
+                      <Link
+                        to={APP_ROUTES.EDIT(project.id)}
+                        className={styles['project-list__icon-btn']}
+                        aria-label="Edit"
+                      >
+                        <AiOutlineEdit />
+                      </Link>
+                      <button
+                        className={styles['project-list__icon-btn']}
+                        onClick={() => showDeleteModal(project.id)}
+                        aria-label="Delete"
+                      >
+                        <AiOutlineDelete />
+                      </button>
+                    </span>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 };
