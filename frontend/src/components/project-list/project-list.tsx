@@ -1,80 +1,52 @@
-import { useState } from 'react';
-import { Link } from 'react-router';
-import type { EditableProjectField } from '../../types';
-import { APP_ROUTES, EDITABLE_PROJECT_FIELDS } from '../../constants';
-import { AiOutlineDelete, AiOutlineEdit } from '../icons';
-import { getFormattedDate } from '../../utils';
-import { useDeleteProject, useEditProject } from '../../api';
+import React, { useCallback, useState } from 'react';
+import { ProjectListItem } from './components';
+import { useDeleteProject } from '../../api';
 import { DeleteModal } from '../delete-modal';
-import { ProjectFieldInlineEdit } from './project-filed-inline-edit';
 import styles from './project-list.module.scss';
 import type { ProjectWithOwner } from '../../schemas';
+import { useSortedProjects } from './hooks/use-sorted-list';
+import { useProjectEditing } from './hooks';
 
 type Props = {
   projects: ProjectWithOwner[];
 };
 
-type EditingState = {
-  id: number | null;
-  field: EditableProjectField | null;
-  value: string;
-};
-
-export const ProjectList: React.FC<Props> = ({ projects }) => {
+export const ProjectList: React.FC<Props> = React.memo(({ projects }) => {
   const [deletedId, setDeletedId] = useState<number>(0);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [editing, setEditing] = useState<EditingState>({
-    id: null,
-    field: null,
-    value: '',
-  });
 
-  const showDeleteModal = (id: number) => {
-    setDeletedId(id);
-    setIsModalOpen(true);
-  };
+  const {
+    editing,
+    handleEditChange,
+    handleEditSubmit,
+    resetEditing,
+    startEdit,
+  } = useProjectEditing();
 
-  const handleCloseModal = () => {
+  const sortedProjects = useSortedProjects(projects);
+
+  const showDeleteModal = useCallback(
+    (id: number) => {
+      setDeletedId(id);
+      setIsModalOpen(true);
+    },
+    [setDeletedId, setIsModalOpen],
+  );
+
+  const handleCloseModal = useCallback(() => {
     setIsModalOpen(false);
-  };
+  }, [setIsModalOpen]);
 
   const deleteProjectMutation = useDeleteProject({
     closeModal: handleCloseModal,
   });
-  const editProjectMutation = useEditProject();
 
-  const handleDeleteProject = async (id: number) => {
-    deleteProjectMutation.mutateAsync(id);
-  };
-
-  const handleEditClick = (
-    project: ProjectWithOwner,
-    field: 'title' | 'description',
-  ) => {
-    setEditing({
-      id: project.id,
-      field,
-      value: project[field] ?? '',
-    });
-  };
-
-  const handleEditChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEditing(prev => ({ ...prev, value: e.target.value }));
-  };
-
-  const handleEditSubmit = (project: ProjectWithOwner) => {
-    if (
-      editing.id === project.id &&
-      editing.field &&
-      editing.value.trim() !== project[editing.field]
-    ) {
-      editProjectMutation.mutate({
-        id: project.id,
-        [editing.field]: editing.value,
-      });
-    }
-    setEditing({ id: null, field: null, value: '' });
-  };
+  const handleDeleteProject = useCallback(
+    async (id: number) => {
+      deleteProjectMutation.mutateAsync(id);
+    },
+    [deleteProjectMutation],
+  );
 
   return (
     <>
@@ -101,88 +73,22 @@ export const ProjectList: React.FC<Props> = ({ projects }) => {
           </thead>
           <tbody>
             {projects &&
-              projects.map((project: ProjectWithOwner, i) => (
-                <tr key={project.id}>
-                  <td>{i + 1}</td>
-                  <td>
-                    <ProjectFieldInlineEdit
-                      value={project.title}
-                      isEditing={
-                        editing.id === project.id &&
-                        editing.field === EDITABLE_PROJECT_FIELDS.TITLE
-                      }
-                      onStartEdit={() =>
-                        handleEditClick(project, EDITABLE_PROJECT_FIELDS.TITLE)
-                      }
-                      onChange={handleEditChange}
-                      onBlur={() => handleEditSubmit(project)}
-                      onKeyDown={e => {
-                        if (e.key === 'Enter') handleEditSubmit(project);
-                        if (e.key === 'Escape')
-                          setEditing({ id: null, field: null, value: '' });
-                      }}
-                      ariaLabel="Edit project title"
-                      placeholder="add title..."
-                    />
-                  </td>
-                  <td>
-                    <ProjectFieldInlineEdit
-                      value={project.description}
-                      isEditing={
-                        editing.id === project.id &&
-                        editing.field === EDITABLE_PROJECT_FIELDS.DESCRIPTION
-                      }
-                      onStartEdit={() =>
-                        handleEditClick(
-                          project,
-                          EDITABLE_PROJECT_FIELDS.DESCRIPTION,
-                        )
-                      }
-                      onChange={handleEditChange}
-                      onBlur={() => handleEditSubmit(project)}
-                      onKeyDown={e => {
-                        if (e.key === 'Enter') handleEditSubmit(project);
-                        if (e.key === 'Escape')
-                          setEditing({ id: null, field: null, value: '' });
-                      }}
-                      ariaLabel="Edit project description"
-                      placeholder="add description..."
-                    />
-                  </td>
-                  <td>{project.owner?.name ?? '-'}</td>
-                  <td>{project.owner?.id ?? '-'}</td>
-                  <td>
-                    <Link
-                      to={APP_ROUTES.PROJECT(project.id)}
-                      className={styles['project-list__link']}
-                    >
-                      project details
-                    </Link>
-                  </td>
-                  <td>{getFormattedDate(project.createdAt)}</td>
-                  <td>
-                    <span className={styles['project-list__actions']}>
-                      <Link
-                        to={APP_ROUTES.EDIT(project.id)}
-                        className={styles['project-list__icon-btn']}
-                        aria-label="Edit"
-                      >
-                        <AiOutlineEdit />
-                      </Link>
-                      <button
-                        className={styles['project-list__icon-btn']}
-                        onClick={() => showDeleteModal(project.id)}
-                        aria-label="Delete"
-                      >
-                        <AiOutlineDelete />
-                      </button>
-                    </span>
-                  </td>
-                </tr>
+              sortedProjects.map((project: ProjectWithOwner, i) => (
+                <ProjectListItem
+                  key={project.id}
+                  project={project}
+                  index={i}
+                  editing={editing}
+                  startEdit={startEdit}
+                  handleEditChange={handleEditChange}
+                  handleEditSubmit={handleEditSubmit}
+                  resetEditing={resetEditing}
+                  showDeleteModal={showDeleteModal}
+                />
               ))}
           </tbody>
         </table>
       </div>
     </>
   );
-};
+});
