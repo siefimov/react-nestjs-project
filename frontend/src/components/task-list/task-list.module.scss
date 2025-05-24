@@ -1,0 +1,33 @@
+@import '../../styles/variables';
+
+.task-list {
+  width: 100%;
+  background: $color-bg-alt;
+  border-radius: $radius;
+  box-shadow: 0 1px 4px 0 rgba(30, 41, 59, 0.04);
+  margin-top: $spacing-md;
+  overflow-x: auto;
+}
+
+.task-list__table {
+  width: 100%;
+  border-radius: $radius;
+  overflow: hidden;
+}
+
+.task-list__table th,
+.task-list__table td {
+  padding: $spacing-xs $spacing-sm;
+  border-bottom: 1px solid $color-border;
+  text-align: left;
+}
+
+.task-list__table th {
+  background: $color-bg;
+  color: $color-text-light;
+  font-weight: 600;
+}
+
+.task-list__table tr:last-child td {
+  border-bottom: none;
+}

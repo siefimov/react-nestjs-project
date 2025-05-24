@@ -1,0 +1,8 @@
+@import '../../styles/_variables.scss';
+
+.project-page__field {
+  margin-bottom: $spacing-sm;
+  color: $color-text;
+  font-size: $font-size-base;
+  word-break: break-word;
+}
