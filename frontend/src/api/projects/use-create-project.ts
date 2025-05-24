@@ -1,13 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-// import type {
-//   CreateProjectRequestDto,
-//   CreateProjectResponseDto,
-//   Project,
-// } from '../../types';
 import {
   type ProjectCreateDto,
   type ProjectResponseDto,
-  type ProjectWithOwner,
+  type ProjectWithOwnerDto,
   ProjectCreateSchema,
 } from '../../schemas';
 import { http } from '../http';
@@ -29,7 +24,7 @@ export const useCreateProject = () => {
 
       queryClient.setQueryData(
         projectQueryKeys.all,
-        (old: ProjectWithOwner[] = []) => [
+        (old: ProjectWithOwnerDto[] = []) => [
           ...old,
           {
             id: Date.now(),

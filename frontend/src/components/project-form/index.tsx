@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-// import { createProjectSchema, type NewProjectFormValues } from '../../types';
 import { APP_ROUTES } from '../../constants';
 import styles from './project-form.module.scss';
 import { type ProjectCreateDto, ProjectCreateSchema } from '../../schemas';

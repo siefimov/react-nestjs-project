@@ -1,24 +1,27 @@
-import { memo } from "react";
-import { Link } from "react-router";
-import type { ProjectWithOwner } from "../../../../schemas";
-import type { EditableProjectField } from "../../../../types";
-import { APP_ROUTES, EDITABLE_PROJECT_FIELDS } from "../../../../constants";
-import { ProjectFieldEditable } from "../project-field-editable";
-import { getFormattedDate } from "../../../../utils";
-import { AiOutlineDelete, AiOutlineEdit } from "../../../icons";
+import { memo } from 'react';
+import { Link } from 'react-router';
+import type { ProjectWithOwnerDto } from '../../../../schemas';
+import type { EditableProjectField } from '../../../../types';
+import { APP_ROUTES, EDITABLE_PROJECT_FIELDS } from '../../../../constants';
+import { ProjectFieldEditable } from '../project-field-editable';
+import { getFormattedDate } from '../../../../utils';
+import { AiOutlineDelete, AiOutlineEdit } from '../../../icons';
 import styles from './project-list-item.module.scss';
 
 type Props = {
-  project: ProjectWithOwner;
+  project: ProjectWithOwnerDto;
   index: number;
   editing: {
     id: number | null;
     field: EditableProjectField | null;
     value: string;
   };
-  startEdit: (project: ProjectWithOwner, field: EditableProjectField) => void;
+  startEdit: (
+    project: ProjectWithOwnerDto,
+    field: EditableProjectField,
+  ) => void;
   handleEditChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleEditSubmit: (project: ProjectWithOwner) => void;
+  handleEditSubmit: (project: ProjectWithOwnerDto) => void;
   resetEditing: () => void;
   showDeleteModal: (id: number) => void;
 };
@@ -85,11 +88,11 @@ export const ProjectListItem: React.FC<Props> = memo(
           />
         </td>
         <td>{project.owner?.name ?? '-'}</td>
-        <td>{project.owner?.id ?? '-'}</td>
         <td>
           <Link
             to={APP_ROUTES.PROJECT(project.id)}
             className={styles['project-list__link']}
+            state={{ projectOwner: project.owner?.name }}
           >
             project details
           </Link>

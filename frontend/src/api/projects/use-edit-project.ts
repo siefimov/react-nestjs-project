@@ -1,16 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-// import type {
-//   Project,
-//   UpdateProjectRequestDto,
-//   UpdateProjectResponseDto,
-// } from '../../types';
 import { http } from '../http';
 import { projectQueryKeys } from './project-query-keys';
 import {
   type ProjectUpdateDto,
   type ProjectResponseDto,
   ProjectUpdateSchema,
-  type ProjectWithOwner,
+  type ProjectWithOwnerDto,
 } from '../../schemas';
 
 export function useEditProject() {
@@ -33,11 +28,11 @@ export function useEditProject() {
         queryKey: projectQueryKeys.detail(updatedProject.id),
       });
 
-      const previousProject = queryClient.getQueryData<ProjectWithOwner>(
+      const previousProject = queryClient.getQueryData<ProjectWithOwnerDto>(
         projectQueryKeys.detail(updatedProject.id),
       );
 
-      queryClient.setQueryData<ProjectWithOwner>(
+      queryClient.setQueryData<ProjectWithOwnerDto>(
         projectQueryKeys.detail(updatedProject.id),
         previous => {
           if (!previous) return previous;

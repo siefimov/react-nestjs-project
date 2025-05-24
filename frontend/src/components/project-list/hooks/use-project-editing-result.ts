@@ -1,7 +1,6 @@
-// hooks/useProjectEditing.ts
 import { useState, useCallback } from 'react';
 import type { EditableProjectField } from '../../../types';
-import type { ProjectWithOwner } from '../../../schemas';
+import type { ProjectWithOwnerDto } from '../../../schemas';
 import { useEditProject } from '../../../api';
 
 type EditingState = {
@@ -12,9 +11,12 @@ type EditingState = {
 
 type UseProjectEditingResult = {
   editing: EditingState;
-  startEdit: (project: ProjectWithOwner, field: EditableProjectField) => void;
+  startEdit: (
+    project: ProjectWithOwnerDto,
+    field: EditableProjectField,
+  ) => void;
   handleEditChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleEditSubmit: (project: ProjectWithOwner) => void;
+  handleEditSubmit: (project: ProjectWithOwnerDto) => void;
   resetEditing: () => void;
 };
 
@@ -27,7 +29,7 @@ export const useProjectEditing = (): UseProjectEditingResult => {
   const editProjectMutation = useEditProject();
 
   const startEdit = useCallback(
-    (project: ProjectWithOwner, field: EditableProjectField) => {
+    (project: ProjectWithOwnerDto, field: EditableProjectField) => {
       setEditing({ id: project.id, field, value: project[field] ?? '' });
     },
     [setEditing],
@@ -41,7 +43,7 @@ export const useProjectEditing = (): UseProjectEditingResult => {
   );
 
   const handleEditSubmit = useCallback(
-    (project: ProjectWithOwner) => {
+    (project: ProjectWithOwnerDto) => {
       if (
         editing.id === project.id &&
         editing.field &&
