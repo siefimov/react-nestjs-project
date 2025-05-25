@@ -12,22 +12,28 @@ export const ProjectInfo: React.FC<Props> = ({ project }) => {
   const projectOwner = location.state?.projectOwner;
 
   return (
-    <div>
-      <p className={styles['project-page__field']}>
-        <b>ID:</b> {project.id}
-      </p>
-      <p className={styles['project-page__field']}>
-        <b>Title:</b> {project.title}
-      </p>
-      <p className={styles['project-page__field']}>
-        <b>Description:</b> {project.description}
-      </p>
-      <p className={styles['project-page__field']}>
-        <b>Owner:</b> {projectOwner}
-      </p>
-      <p className={styles['project-page__field']}>
-        <b>Created:</b> {getFormattedDate(project.createdAt)}
-      </p>
+    <div className={styles['project-info']}>
+      <div className={styles['project-info__title']}>{project.title}</div>
+      <div className={styles['project-info__field']}>
+        <span className={styles['project-info__label']}>ID:</span>
+        <span className={styles['project-info__value']}>{project.id}</span>
+      </div>
+      <div className={styles['project-info__field']}>
+        <span className={styles['project-info__label']}>Description:</span>
+        <span className={styles['project-info__value']}>
+          {project.description}
+        </span>
+      </div>
+      <div className={styles['project-info__field']}>
+        <span className={styles['project-info__label']}>Owner:</span>
+        <span className={styles['project-info__value']}>{projectOwner}</span>
+      </div>
+      <div className={styles['project-info__field']}>
+        <span className={styles['project-info__label']}>Created:</span>
+        <span className={styles['project-info__value']}>
+          {getFormattedDate(project.createdAt)}
+        </span>
+      </div>
     </div>
   );
 };

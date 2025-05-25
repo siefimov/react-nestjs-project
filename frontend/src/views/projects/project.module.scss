@@ -7,4 +7,9 @@
   padding: $spacing-md $spacing-sm;
   max-width: 1000px;
   margin: $spacing-md auto;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
 }

@@ -1,0 +1,70 @@
+@import '../../styles/_variables.scss';
+
+.task-form {
+  display: flex;
+  gap: 20px;
+  background: $color-bg-alt;
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  padding: $spacing-sm;
+  max-width: 600px;
+  //   margin: 0 auto;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.06);
+}
+
+.task-form__field {
+  margin-bottom: $spacing-sm;
+  display: flex;
+  flex-direction: column;
+}
+
+.task-form__label {
+  font-size: $font-size-sm;
+  color: $color-text-light;
+  margin-bottom: 0.25rem;
+}
+
+.task-form__input,
+.task-form__textarea,
+.task-form__select {
+  padding: $spacing-xs;
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  font-size: $font-size-base;
+  font-family: $font-family-base;
+  background: $color-bg;
+  color: $color-text;
+  transition: border-color $transition;
+
+  &:focus {
+    border-color: $color-primary;
+    outline: none;
+  }
+}
+
+.task-form__textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.task-form__button {
+  background: $color-primary;
+  color: $color-bg-alt;
+  border: none;
+  border-radius: $radius;
+  padding: $spacing-xs $spacing-sm;
+  font-size: $font-size-base;
+  font-family: $font-family-base;
+  cursor: pointer;
+  transition: background $transition;
+
+  &:hover {
+    background: $color-primary-light;
+  }
+}
+
+.task-form__error {
+  color: $color-danger;
+  font-size: $font-size-sm;
+  margin-top: 0.25rem;
+}
