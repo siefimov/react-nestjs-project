@@ -4,8 +4,8 @@ import { useDeleteProject } from '../../api';
 import { DeleteModal } from '../delete-modal';
 import styles from './project-list.module.scss';
 import type { ProjectWithOwnerDto } from '../../schemas';
-import { useSortedProjects } from './hooks/use-sorted-list';
 import { useProjectEditing } from './hooks';
+import { useSortedItems } from '../../utils';
 
 type Props = {
   projects: ProjectWithOwnerDto[];
@@ -23,7 +23,10 @@ export const ProjectList: React.FC<Props> = React.memo(({ projects }) => {
     startEdit,
   } = useProjectEditing();
 
-  const sortedProjects = useSortedProjects(projects);
+  const sortedProjects = useSortedItems<ProjectWithOwnerDto>(
+    projects,
+    p => p.createdAt,
+  );
 
   const showDeleteModal = useCallback(
     (id: number) => {
