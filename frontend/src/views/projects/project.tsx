@@ -1,37 +1,26 @@
+import { useParams } from 'react-router';
 import { useProject } from '../../api';
+import { ProjectInfo, TaskList } from '../../components';
+import { TaskForm } from '../../components/task-form/task-form';
 import styles from './project.module.scss';
 
 export const Project = () => {
-  const project = useProject();
-  console.log(project);
+  const { data: project, isLoading, isError, error } = useProject();
+  const { id } = useParams();
 
-  if (!project.data) {
+  if (isLoading) {
     return <div>Loading...</div>;
   }
-
-  const { data: projectData } = project;
-  const getFormattedDate = (date: string) => {
-    return date.split('T')[0].split('-').reverse().join('.');
-  };
+  if (isError || !project)
+    return <div>Error: {error?.message || 'Project not found'}</div>;
 
   return (
     <div className={styles['project-page']}>
-      <p className={styles['project-page__field']}>
-        {' '}
-        <b>ID:</b> {projectData.id}{' '}
-      </p>
-      <p className={styles['project-page__field']}>
-        {' '}
-        <b>Title:</b> {projectData.title}{' '}
-      </p>
-      <p className={styles['project-page__field']}>
-        {' '}
-        <b>Description:</b> {projectData.description}{' '}
-      </p>
-      <p className={styles['project-page__field']}>
-        {' '}
-        <b>Created:</b> {getFormattedDate(projectData.createdAt)}{' '}
-      </p>
+      <div className={styles['project-page__header']}>
+        <ProjectInfo project={project} />
+        <TaskForm id={Number(id)} />
+      </div>
+      <TaskList projectId={project.id} />
     </div>
   );
 };

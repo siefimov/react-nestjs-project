@@ -8,7 +8,7 @@ export const ProjectCreateSchema = z.object({
 });
 
 export const ProjectUpdateSchema = ProjectCreateSchema.partial().extend({
-  id: z.number().int().min(1, 'Title is required'),
+  id: z.number().int().min(1, 'ID is required'),
 });
 
 export const ProjectResponseSchema = z.object({
@@ -27,4 +27,4 @@ export const ProjectWithOwnerSchema = ProjectResponseSchema.extend({
 export type ProjectCreateDto = z.infer<typeof ProjectCreateSchema>;
 export type ProjectUpdateDto = z.infer<typeof ProjectUpdateSchema>;
 export type ProjectResponseDto = z.infer<typeof ProjectResponseSchema>;
-export type ProjectWithOwner = z.infer<typeof ProjectWithOwnerSchema>;
+export type ProjectWithOwnerDto = z.infer<typeof ProjectWithOwnerSchema>;

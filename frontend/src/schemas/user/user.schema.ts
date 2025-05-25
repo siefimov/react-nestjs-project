@@ -8,4 +8,10 @@ export const UserSchema = z.object({
   updatedAt: z.string(),
 });
 
+export const UserCreateSchema = UserSchema.pick({
+  name: true,
+  email: true,
+});
+
 export type User = z.infer<typeof UserSchema>;
+export type UserCreateDto = z.infer<typeof UserCreateSchema>;

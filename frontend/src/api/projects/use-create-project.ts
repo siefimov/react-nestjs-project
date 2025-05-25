@@ -1,20 +1,19 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-// import type {
-//   CreateProjectRequestDto,
-//   CreateProjectResponseDto,
-//   Project,
-// } from '../../types';
 import {
   type ProjectCreateDto,
   type ProjectResponseDto,
-  type ProjectWithOwner,
+  type ProjectWithOwnerDto,
   ProjectCreateSchema,
 } from '../../schemas';
 import { http } from '../http';
 import { projectQueryKeys } from './project-query-keys';
+import { API_ROUTES } from '../../constants';
 
 const createProjectFn = async (newPropect: ProjectCreateDto) => {
-  const response = await http.post<ProjectResponseDto>('/projects', newPropect);
+  const response = await http.post<ProjectResponseDto>(
+    API_ROUTES.PROJECTS,
+    newPropect,
+  );
   return ProjectCreateSchema.parse(response);
 };
 
@@ -29,7 +28,7 @@ export const useCreateProject = () => {
 
       queryClient.setQueryData(
         projectQueryKeys.all,
-        (old: ProjectWithOwner[] = []) => [
+        (old: ProjectWithOwnerDto[] = []) => [
           ...old,
           {
             id: Date.now(),

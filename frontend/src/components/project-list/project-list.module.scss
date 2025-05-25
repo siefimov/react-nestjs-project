@@ -31,29 +31,3 @@
 .project-list__table tr:last-child td {
   border-bottom: none;
 }
-
-// .project-list__actions {
-//   display: flex;
-//   gap: $spacing-xs;
-//   align-items: center;
-// }
-
-// .project-list__link {
-//   color: $color-accent;
-//   font-weight: 500;
-//   &:hover {
-//     text-decoration: underline;
-//     color: $color-primary;
-//   }
-// }
-
-// .project-list__icon-btn {
-//   background: none;
-//   border: none;
-//   padding: 0.2em;
-//   color: $color-text-light;
-//   transition: color $transition;
-//   &:hover {
-//     color: $color-danger;
-//   }
-// }

@@ -1,11 +1,10 @@
 import { useCreateProject } from '../../api';
 import { ProjectForm } from '../../components/project-form';
-import type { NewProjectFormValues } from '../../types';
+import type { ProjectCreateDto } from '../../schemas';
 
 export const CreateProject = () => {
   const createProject = useCreateProject();
-  const onSubmit = async (data: NewProjectFormValues) =>
-    createProject.mutate(data);
+  const onSubmit = async (data: ProjectCreateDto) => createProject.mutate(data);
 
   return (
     <div>

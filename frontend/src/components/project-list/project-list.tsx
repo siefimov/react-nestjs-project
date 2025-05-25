@@ -1,14 +1,14 @@
 import React, { useCallback, useState } from 'react';
 import { ProjectListItem } from './components';
 import { useDeleteProject } from '../../api';
-import { DeleteModal } from '../delete-modal';
-import styles from './project-list.module.scss';
-import type { ProjectWithOwner } from '../../schemas';
-import { useSortedProjects } from './hooks/use-sorted-list';
+import { DeleteModal } from '../index';
+import type { ProjectWithOwnerDto } from '../../schemas';
 import { useProjectEditing } from './hooks';
+import { useSortedItems } from '../../utils';
+import styles from './project-list.module.scss';
 
 type Props = {
-  projects: ProjectWithOwner[];
+  projects: ProjectWithOwnerDto[];
 };
 
 export const ProjectList: React.FC<Props> = React.memo(({ projects }) => {
@@ -23,7 +23,10 @@ export const ProjectList: React.FC<Props> = React.memo(({ projects }) => {
     startEdit,
   } = useProjectEditing();
 
-  const sortedProjects = useSortedProjects(projects);
+  const sortedProjects = useSortedItems<ProjectWithOwnerDto>(
+    projects,
+    p => p.createdAt,
+  );
 
   const showDeleteModal = useCallback(
     (id: number) => {
@@ -65,7 +68,6 @@ export const ProjectList: React.FC<Props> = React.memo(({ projects }) => {
               <th>Title</th>
               <th>Description</th>
               <th>Owner</th>
-              <th>Owner ID</th>
               <th>Project details</th>
               <th>Created</th>
               <th>Action</th>
@@ -73,7 +75,7 @@ export const ProjectList: React.FC<Props> = React.memo(({ projects }) => {
           </thead>
           <tbody>
             {projects &&
-              sortedProjects.map((project: ProjectWithOwner, i) => (
+              sortedProjects.map((project: ProjectWithOwnerDto, i) => (
                 <ProjectListItem
                   key={project.id}
                   project={project}

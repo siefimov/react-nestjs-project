@@ -23,9 +23,10 @@ export class CreateTaskDto {
   @Min(1)
   readonly projectId: number;
 
+  @IsOptional()
   @IsInt()
   @Min(1)
-  readonly assignedUserId: number;
+  readonly assignedUserId?: number;
 
   @IsOptional()
   @IsEnum(TaskStatus)

@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { http } from '../http';
 import { projectQueryKeys } from './project-query-keys';
+import { API_ROUTES } from '../../constants';
 
 type Props = {
   closeModal: () => void;
@@ -10,7 +11,7 @@ export const useDeleteProject = ({ closeModal }: Props) => {
   const queryClient = useQueryClient();
 
   const deteleFn = async (id: number) => {
-    const response = await http.delete<void>(`/projects/${id}`);
+    const response = await http.delete<void>(API_ROUTES.PROJECT(id));
     return response;
   };
 

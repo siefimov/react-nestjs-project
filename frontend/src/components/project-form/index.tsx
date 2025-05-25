@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-// import { createProjectSchema, type NewProjectFormValues } from '../../types';
 import { APP_ROUTES } from '../../constants';
 import styles from './project-form.module.scss';
 import { type ProjectCreateDto, ProjectCreateSchema } from '../../schemas';
@@ -63,7 +62,7 @@ export const ProjectForm: React.FC<Props> = ({ onSubmit }) => {
         <input
           type="number"
           className={styles['project-form__input']}
-          {...register('ownerId')}
+          {...register('ownerId', { valueAsNumber: true })}
         />
         {errors.ownerId && (
           <span className={styles['project-form__error']}>

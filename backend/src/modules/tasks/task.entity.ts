@@ -35,7 +35,7 @@ export class Task {
   @JoinColumn({ name: 'projectId' })
   project: Project;
 
-  @Column()
+  @Column({ nullable: true })
   assignedUserId: number;
 
   @ManyToOne(() => User, (user) => user.tasks, {

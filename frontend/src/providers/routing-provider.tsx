@@ -4,7 +4,7 @@ import {
   Route,
   RouterProvider,
 } from 'react-router';
-import { AppLayout } from '../components/app-layout';
+import { AppLayout } from '../components';
 import { Projects, Project, CreateProject } from '../views';
 import { APP_ROUTES } from '../constants';
 
