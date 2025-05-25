@@ -1,9 +1,16 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient, type UseMutationOptions } from '@tanstack/react-query';
 import { type Task, TaskSchema, type TaskUpdateDto } from '../../schemas';
 import { http } from '../http';
 import { taskQueryKeys } from './task-query-key';
 
-export function useEditTask() {
+export function useEditTask(
+  options?: UseMutationOptions<
+    Task, // TData (результат)
+    unknown, // TError
+    TaskUpdateDto, // TVariables
+    { previousTask?: Task } // TContext
+  >,
+) {
   const queryClient = useQueryClient();
 
   const editTaskFn = async (updatedTask: TaskUpdateDto) => {
@@ -33,6 +40,10 @@ export function useEditTask() {
       );
 
       return { previousTask };
+    },
+
+    onSuccess: (...args) => {
+      options?.onSuccess?.(...args);
     },
 
     onError: (_error, updatedTask, context) => {

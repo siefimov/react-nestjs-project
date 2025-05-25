@@ -1,6 +1,5 @@
 import { useProject } from '../../api';
-import { ProjectInfo } from '../../components';
-import { TaskList } from '../../components/task-list';
+import { ProjectInfo, TaskList } from '../../components';
 import styles from './project.module.scss';
 
 export const Project = () => {
