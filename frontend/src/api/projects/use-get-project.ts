@@ -3,12 +3,15 @@ import { useParams } from 'react-router';
 import { http } from '../http';
 import { projectQueryKeys } from './project-query-keys';
 import { ProjectResponseSchema, type ProjectResponseDto } from '../../schemas';
+import { API_ROUTES } from '../../constants';
 
 export const useProject = () => {
   const { id } = useParams();
 
   const getProjectFn = async () => {
-    const response = await http.get<ProjectResponseDto>(`/projects/${id}`);
+    const response = await http.get<ProjectResponseDto>(
+      API_ROUTES.PROJECT(Number(id)),
+    );
     return ProjectResponseSchema.parse(response);
   };
 

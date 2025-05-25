@@ -1,21 +1,26 @@
-import { useMutation, useQueryClient, type UseMutationOptions } from '@tanstack/react-query';
+import {
+  useMutation,
+  useQueryClient,
+  type UseMutationOptions,
+} from '@tanstack/react-query';
 import { type Task, TaskSchema, type TaskUpdateDto } from '../../schemas';
 import { http } from '../http';
 import { taskQueryKeys } from './task-query-key';
+import { API_ROUTES } from '../../constants';
 
 export function useEditTask(
   options?: UseMutationOptions<
-    Task, // TData (результат)
-    unknown, // TError
-    TaskUpdateDto, // TVariables
-    { previousTask?: Task } // TContext
+    Task,
+    unknown,
+    TaskUpdateDto,
+    { previousTask?: Task }
   >,
 ) {
   const queryClient = useQueryClient();
 
   const editTaskFn = async (updatedTask: TaskUpdateDto) => {
     const response = await http.put<Task>(
-      `/tasks/${updatedTask.id}`,
+      API_ROUTES.TASK(updatedTask.id),
       updatedTask,
     );
 

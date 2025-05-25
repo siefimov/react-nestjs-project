@@ -7,13 +7,14 @@ import {
   ProjectUpdateSchema,
   type ProjectWithOwnerDto,
 } from '../../schemas';
+import { API_ROUTES } from '../../constants';
 
 export function useEditProject() {
   const queryClient = useQueryClient();
 
   const editProjectFn = async (updatedProject: ProjectUpdateDto) => {
     const response = await http.put<ProjectResponseDto>(
-      `/projects/${updatedProject.id}`,
+      API_ROUTES.PROJECT(updatedProject.id),
       updatedProject,
     );
 
