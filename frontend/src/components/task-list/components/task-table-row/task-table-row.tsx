@@ -33,7 +33,6 @@ export const TaskTableRow: React.FC<Props> = ({
 
   const handleTitleBlurOrEnter = (value: string) => {
     handleTaskChange({ id: task.id, title: value });
-    // resetEditing();
   };
 
   const handleDescriptionDoubleClick = () => {
@@ -46,7 +45,6 @@ export const TaskTableRow: React.FC<Props> = ({
 
   const handleDescriptionBlurOrEnter = (value: string) => {
     handleTaskChange({ id: task.id, description: value });
-    // resetEditing();
   };
 
   const resetEditing = () => {
@@ -104,9 +102,9 @@ export const TaskTableRow: React.FC<Props> = ({
       </td>
       <td>
         <select value={task.status} onChange={handleStatusChange}>
-          <option value="todo">Todo</option>
-          <option value="in_progress">In Progress</option>
-          <option value="done">Done</option>
+          <option value="todo">todo</option>
+          <option value="in_progress">in progress</option>
+          <option value="done">done</option>
         </select>
       </td>
       <td>{getFormattedDate(task.createdAt)}</td>
