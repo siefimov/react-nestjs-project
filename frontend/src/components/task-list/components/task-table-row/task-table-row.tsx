@@ -79,8 +79,8 @@ export const TaskTableRow: React.FC<Props> = ({
   };
 
   return (
-    <tr>
-      <td>{index + 1}</td>
+    <tr className={styles['task-list__row']}>
+      <td className={styles['task-list__cell']}>{index + 1}</td>
       <TaskTableCellEditable
         value={task.title}
         editing={editing.id === task.id && editing.field === 'title'}
@@ -100,7 +100,7 @@ export const TaskTableRow: React.FC<Props> = ({
         onEscape={resetEditing}
         placeholder="add description"
       />
-      <td>
+      <td className={styles['task-list__cell']}>
         <select
           value={task.assignedUserId ?? ''}
           onChange={handleAssigneeChange}
@@ -113,15 +113,17 @@ export const TaskTableRow: React.FC<Props> = ({
           ))}
         </select>
       </td>
-      <td>
+      <td className={styles['task-list__cell']}>
         <select value={task.status} onChange={handleStatusChange}>
           <option value="todo">todo</option>
           <option value="in_progress">in progress</option>
           <option value="done">done</option>
         </select>
       </td>
-      <td>{getFormattedDate(task.createdAt)}</td>
-      <td>
+      <td className={`${styles['task-list__cell']}`}>
+        {getFormattedDate(task.createdAt)}
+      </td>
+      <td className={`${styles['task-list__cell']} ${styles['action']}`}>
         <button
           className={styles['task-list__icon-btn']}
           onClick={() => handleDeleteTask(task.id)}

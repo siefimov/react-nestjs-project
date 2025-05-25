@@ -34,7 +34,7 @@
   font-family: $font-family-base;
   background: $color-bg;
   color: $color-text;
-  transition: border-color $transition;
+  transition: border-color $transition, background $transition;
 
   &:focus {
     border-color: $color-primary;
