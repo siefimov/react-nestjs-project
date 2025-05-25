@@ -17,6 +17,7 @@ export const TaskList: React.FC<Props> = ({ projectId }) => {
             <th>assignee</th>
             <th>status</th>
             <th>created</th>
+            <th>actions</th>
           </tr>
         </thead>
         <TaskTableBody projectId={projectId} />

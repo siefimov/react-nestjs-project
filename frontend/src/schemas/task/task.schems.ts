@@ -14,7 +14,7 @@ export const TaskSchema = z.object({
 });
 
 export const TaskCreateSchema = z.object({
-  title: z.string().max(100),
+  title: z.string().min(1).max(100),
   description: z.string().nullable().optional(),
   projectId: z.number().optional(),
   assignedUserId: z.number().nullable().optional(),

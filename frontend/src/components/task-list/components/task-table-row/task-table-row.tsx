@@ -2,6 +2,10 @@ import { getFormattedDate } from '../../../../utils';
 import type { Task, TaskUpdateDto, User } from '../../../../schemas';
 import type { TaskStatus } from '../../../../types';
 import { TaskTableCellEditable } from '../task-table-cell-editable';
+import { AiOutlineDelete } from '../../../icons';
+import styles from './task-table-row.module.scss';
+import { useDeleteTask } from '../../../../api';
+import { useCallback } from 'react';
 
 type InlineEditableTaskField = 'title' | 'description';
 type Editing = {
@@ -27,6 +31,15 @@ export const TaskTableRow: React.FC<Props> = ({
   setEditing,
   handleTaskChange,
 }) => {
+  const deleteTaskMutation = useDeleteTask();
+
+  const handleDeleteTask = useCallback(
+    async (id: number) => {
+      deleteTaskMutation.mutateAsync(id);
+    },
+    [deleteTaskMutation],
+  );
+
   const handleTitleDoubleClick = () => {
     setEditing({ id: task.id, field: 'title', value: task.title });
   };
@@ -108,6 +121,15 @@ export const TaskTableRow: React.FC<Props> = ({
         </select>
       </td>
       <td>{getFormattedDate(task.createdAt)}</td>
+      <td>
+        <button
+          className={styles['task-list__icon-btn']}
+          onClick={() => handleDeleteTask(task.id)}
+          aria-label="Delete"
+        >
+          <AiOutlineDelete />
+        </button>
+      </td>
     </tr>
   );
 };
