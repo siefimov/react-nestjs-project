@@ -62,7 +62,7 @@ export const ProjectForm: React.FC<Props> = ({ onSubmit }) => {
         <input
           type="number"
           className={styles['project-form__input']}
-          {...register('ownerId')}
+          {...register('ownerId', { valueAsNumber: true })}
         />
         {errors.ownerId && (
           <span className={styles['project-form__error']}>
