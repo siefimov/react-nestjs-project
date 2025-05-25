@@ -1,11 +1,11 @@
 import React, { useCallback, useState } from 'react';
 import { ProjectListItem } from './components';
 import { useDeleteProject } from '../../api';
-import { DeleteModal } from '../delete-modal';
-import styles from './project-list.module.scss';
+import { DeleteModal } from '../index';
 import type { ProjectWithOwnerDto } from '../../schemas';
 import { useProjectEditing } from './hooks';
 import { useSortedItems } from '../../utils';
+import styles from './project-list.module.scss';
 
 type Props = {
   projects: ProjectWithOwnerDto[];
