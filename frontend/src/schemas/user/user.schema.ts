@@ -13,5 +13,18 @@ export const UserCreateSchema = UserSchema.pick({
   email: true,
 });
 
+export const UserRegisterSchema = z.object({
+  name: z.string().min(1),
+  email: z.string().email(),
+  password: z.string().min(6),
+});
+
+export const UserLoginSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(6),
+});
+
 export type User = z.infer<typeof UserSchema>;
 export type UserCreateDto = z.infer<typeof UserCreateSchema>;
+export type UserRegisterDto = z.infer<typeof UserRegisterSchema>;
+export type UserLoginDto = z.infer<typeof UserLoginSchema>;
