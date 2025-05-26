@@ -6,4 +6,6 @@ export const API_ROUTES = {
   TASKS_BY_PROJECT: (projectId: number) => `/tasks?projectId=${projectId}`,
   USERS: '/users',
   USER: (id: number) => `/users/${id}`,
+  REGISTER: '/auth/register',
+  LOGIN: '/auth/login',
 };
