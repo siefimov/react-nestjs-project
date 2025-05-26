@@ -4,13 +4,13 @@
   background: $color-bg-alt;
   border-radius: $radius;
   box-shadow: 0 1px 4px 0 rgba(30, 41, 59, 0.04);
-  padding: $spacing-md $spacing-sm;
+  padding: $spacing-lg $spacing-md;
   max-width: 500px;
-  margin: $spacing-md auto;
+  margin: $spacing-lg auto;
 }
 
 .project-form__field {
-  margin-bottom: $spacing-sm;
+  margin-bottom: $spacing-md;
   display: flex;
   flex-direction: column;
   gap: 0.3em;
@@ -19,6 +19,7 @@
 .project-form__label {
   font-weight: 500;
   color: $color-text-light;
+  font-size: $font-size-sm;
 }
 
 .project-form__input,
@@ -38,11 +39,15 @@
 
 .project-form__error {
   color: $color-danger;
-  font-size: $font-size-sm;
+  font-size: $font-size-xs;
 }
 
 .project-form__actions {
   display: flex;
   gap: $spacing-sm;
-  margin-top: $spacing-sm;
+  margin-top: $spacing-md;
+}
+
+button.project-form__button-back {
+  background-color: $color-primary-light;
 }

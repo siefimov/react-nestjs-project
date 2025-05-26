@@ -1,17 +1,125 @@
 @import '../../styles/_variables.scss';
 
 .app-layout {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: $spacing-md $spacing-sm;
+  width: 100vw;
+  min-height: 100vh;
+  max-width: none;
+  margin: 0;
+  padding: $spacing-lg $spacing-md;
   background: $color-bg-alt;
-  border-radius: $radius;
-  box-shadow: 0 2px 12px 0 rgba(30, 41, 59, 0.06);
-  min-height: 80vh;
+  border-radius: 0;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-layout__header {
+  padding-bottom: $spacing-md;
+  border-bottom: 1px solid $color-border;
+  // margin-bottom: $spacing-md;
 }
 
 .app-layout__title {
-  margin-bottom: $spacing-md;
-  font-size: 2rem;
-  text-align: center;
+  margin: 0;
+  font-size: $font-size-xl;
+  text-align: left;
+  color: $color-primary;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.app-layout__body {
+  display: flex;
+  gap: $spacing-lg;
+  min-height: 60vh;
+  flex: 1 1 auto;
+}
+
+.app-layout__sidebar {
+  min-width: 220px;
+  max-width: 260px;
+  background: $color-bg;
+  border-radius: 0 $radius $radius 0;
+  box-shadow: 0 4px 24px 0 rgba(30, 41, 59, 0.06);
+  padding: $spacing-md;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 350px;
+  // margin-top: $spacing-xs;
+  margin-bottom: $spacing-xs;
+  transition: box-shadow $transition, background $transition;
+  height: calc(100vh - 2 * #{$spacing-lg});
+  position: relative;
+  left: calc(-1 * #{$spacing-md});
+  border-left: none;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.app-layout__nav {
+  width: 100%;
+}
+
+.app-layout__nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.app-layout__nav-item {
+  margin-bottom: $spacing-sm;
+  width: 100%;
+}
+
+.app-layout__nav-link {
+  display: flex;
+  align-items: center;
+  color: $color-primary;
+  text-decoration: none;
+  font-size: $font-size-base;
+  font-weight: 500;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $radius;
+  transition: background $transition, color $transition, box-shadow $transition;
+  letter-spacing: 0.01em;
+  width: 100%;
+
+  &:hover,
+  &:focus {
+    background: $color-primary-light;
+    color: $color-bg-alt;
+    box-shadow: 0 2px 8px 0 rgba(96, 165, 250, 0.1);
+    outline: none;
+  }
+}
+
+.app-layout__main {
+  flex: 1;
+  padding: 0;
+  min-width: 0;
+  padding-top: $spacing-md;
+}
+
+@media (max-width: 900px) {
+  .app-layout__body {
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+  .app-layout__sidebar {
+    min-width: 0;
+    max-width: 100%;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+    margin-bottom: $spacing-sm;
+    padding: $spacing-sm $spacing-xs;
+    height: auto;
+    left: 0;
+    border-radius: $radius;
+  }
+  .app-layout__main {
+    padding: 0;
+  }
 }

@@ -9,6 +9,7 @@
 .project-list__link {
   color: $color-accent;
   font-weight: 500;
+  font-size: $font-size-base;
   &:hover {
     text-decoration: underline;
     color: $color-primary;
@@ -21,7 +22,11 @@
   padding: 0.2em;
   color: $color-text-light;
   transition: color $transition;
-  td &:hover {
+  font-size: 1.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover {
     color: $color-danger;
   }
 }

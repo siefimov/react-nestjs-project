@@ -5,7 +5,7 @@
   background: $color-bg-alt;
   border-radius: $radius;
   box-shadow: 0 1px 4px 0 rgba(30, 41, 59, 0.04);
-  margin-top: $spacing-md;
+  margin-top: $spacing-lg;
   overflow-x: auto;
 }
 
@@ -13,11 +13,12 @@
   width: 100%;
   border-radius: $radius;
   overflow: hidden;
+  font-size: $font-size-base;
 }
 
 .project-list__table th,
 .project-list__table td {
-  padding: $spacing-xs $spacing-sm;
+  padding: $spacing-sm $spacing-sm;
   border-bottom: 1px solid $color-border;
   text-align: left;
 }
@@ -26,6 +27,7 @@
   background: $color-bg;
   color: $color-text-light;
   font-weight: 600;
+  font-size: $font-size-sm;
 }
 
 .project-list__table tr:last-child td {
