@@ -2,18 +2,17 @@
 
 .task-form {
   display: flex;
-  gap: 20px;
+  gap: $spacing-lg;
   background: $color-bg-alt;
   border: 1px solid $color-border;
   border-radius: $radius;
-  padding: $spacing-sm;
+  padding: $spacing-lg $spacing-md;
   max-width: 600px;
-  //   margin: 0 auto;
   box-shadow: 0 2px 8px rgba(99, 102, 241, 0.06);
 }
 
 .task-form__field {
-  margin-bottom: $spacing-sm;
+  margin-bottom: $spacing-md;
   display: flex;
   flex-direction: column;
 }
@@ -22,6 +21,7 @@
   font-size: $font-size-sm;
   color: $color-text-light;
   margin-bottom: 0.25rem;
+  font-weight: 500;
 }
 
 .task-form__input,
@@ -52,7 +52,7 @@
   color: $color-bg-alt;
   border: none;
   border-radius: $radius;
-  padding: $spacing-xs $spacing-sm;
+  padding: $spacing-xs $spacing-md;
   font-size: $font-size-base;
   font-family: $font-family-base;
   cursor: pointer;
@@ -65,6 +65,6 @@
 
 .task-form__error {
   color: $color-danger;
-  font-size: $font-size-sm;
+  font-size: $font-size-xs;
   margin-top: 0.25rem;
 }

@@ -12,7 +12,7 @@ export const Projects = () => {
       <div className={styles['projects-page__header']}>
         <h2 className={styles['projects-page__title']}>List of Projects</h2>
         <Link
-          to={APP_ROUTES.CREATE}
+          to={APP_ROUTES.PROJECT_CREATE}
           className={styles['projects-page__new-link']}
         >
           + New

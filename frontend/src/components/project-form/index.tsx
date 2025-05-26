@@ -74,8 +74,12 @@ export const ProjectForm: React.FC<Props> = ({ onSubmit }) => {
         <button type="submit" disabled={isSubmitting}>
           Create Project
         </button>
-        <button type="button" onClick={() => navigate(APP_ROUTES.PROJECTS)}>
-          Назад до списку проектів
+        <button
+          className={styles['project-form__button-back']}
+          type="button"
+          onClick={() => navigate(APP_ROUTES.PROJECTS)}
+        >
+          Back to projects
         </button>
       </div>
     </form>

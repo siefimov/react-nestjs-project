@@ -6,6 +6,7 @@ body {
   font-size: $font-size-base;
   color: $color-text;
   background: $color-bg;
+  line-height: 1.6;
 }
 
 h1,
@@ -14,23 +15,29 @@ h3,
 h4 {
   color: $color-primary;
   font-weight: 700;
+  margin-bottom: $spacing-sm;
+  line-height: 1.2;
 }
 
 a {
   color: $color-primary;
   transition: color $transition;
+  text-decoration: none;
   &:hover {
     color: $color-primary-light;
+    text-decoration: underline;
   }
 }
 
 button {
   cursor: pointer;
   border-radius: $radius;
-  padding: $spacing-xs $spacing-sm;
+  padding: $spacing-xs $spacing-md;
   background: $color-primary;
   color: #fff;
   border: none;
+  font-size: $font-size-base;
+  font-family: $font-family-base;
   transition: background $transition;
   &:hover:not(:disabled) {
     background: $color-primary-light;

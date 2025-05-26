@@ -13,7 +13,7 @@ const router = createBrowserRouter(
     <Route element={<AppLayout />}>
       <Route index element={<Projects />} />
       <Route path={APP_ROUTES.PROJECT(':id')} element={<Project />} />
-      <Route path={APP_ROUTES.CREATE} element={<CreateProject />} />
+      <Route path={APP_ROUTES.PROJECT_CREATE} element={<CreateProject />} />
       <Route path={APP_ROUTES.EDIT(':id')} element={<div>Edit Project</div>} />
       <Route path="*" element={<div>Not Found Page</div>} />
     </Route>,
