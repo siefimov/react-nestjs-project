@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import { Project } from '../projects/project.entity';
 import { Task } from '../tasks/task.entity';
+import { Exclude } from 'class-transformer';
 
 @Entity('users')
 export class User {
@@ -19,6 +20,10 @@ export class User {
 
   @Column({ unique: true })
   email: string;
+
+  @Column()
+  @Exclude()
+  password: string;
 
   @OneToMany(() => Project, (project) => project.owner)
   projects: Project[];
