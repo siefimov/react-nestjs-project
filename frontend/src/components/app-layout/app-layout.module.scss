@@ -11,32 +11,3 @@
   box-shadow: none;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: $spacing-md;
-  border-bottom: 1px solid $color-border;
-
-  &__title {
-    margin: 0;
-    font-size: $font-size-xl;
-    text-align: left;
-    color: $color-primary;
-    font-weight: 700;
-    letter-spacing: 0.01em;
-  }
-
-  &__user-block {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-  }
-
-  &__logout {
-    background-color: $color-bg-light;
-    border: 1px solid $color-border;
-    color: $color-primary;
-    transition: $transition;
-  }
-}
