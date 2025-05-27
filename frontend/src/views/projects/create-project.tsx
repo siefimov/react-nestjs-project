@@ -1,5 +1,5 @@
 import { useCreateProject } from '../../api';
-import { ProjectForm } from '../../components/project-form';
+import { ProjectForm } from '../../components/project-form/project-form';
 import type { ProjectCreateDto } from '../../schemas';
 
 export const CreateProject = () => {
