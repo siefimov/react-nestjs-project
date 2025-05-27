@@ -1,5 +1,5 @@
 import { apiClient } from './api-client';
-
+import { HTTP_METHODS } from '../constants';
 type RequestMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 interface RequestConfig {
@@ -9,7 +9,7 @@ interface RequestConfig {
 
 async function request<T>(
   url: string,
-  method: RequestMethod = 'GET',
+  method: RequestMethod = HTTP_METHODS.GET,
   data: any = null,
   config: RequestConfig = {},
 ): Promise<T> {
@@ -35,13 +35,13 @@ async function request<T>(
 
 export const http = {
   get: <T>(url: string, config: RequestConfig = {}) =>
-    request<T>(url, 'GET', null, config),
+    request<T>(url, HTTP_METHODS.GET, null, config),
   post: <T>(url: string, data: any, config: RequestConfig = {}) =>
-    request<T>(url, 'POST', data, config),
+    request<T>(url, HTTP_METHODS.POST, data, config),
   put: <T>(url: string, data: any, config: RequestConfig = {}) =>
-    request<T>(url, 'PUT', data, config),
+    request<T>(url, HTTP_METHODS.PUT, data, config),
   patch: <T>(url: string, data: any, config: RequestConfig = {}) =>
-    request<T>(url, 'PATCH', data, config),
+    request<T>(url, HTTP_METHODS.PATCH, data, config),
   delete: <T>(url: string, config: RequestConfig = {}) =>
-    request<T>(url, 'DELETE', null, config),
+    request<T>(url, HTTP_METHODS.DELETE, null, config),
 };
