@@ -5,7 +5,7 @@ import { userQueryKeys } from './user-query-key';
 import { API_ROUTES } from '../../constants';
 
 const getUsersFn = async () => {
-  const data = await http.get<User[]>(API_ROUTES.USERS);
+  const data = await http.get<User[]>(API_ROUTES.USERS, { withAuth: true });
   return UserSchema.array().parse(data);
 };
 

@@ -1,11 +1,14 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
 import { API_ROUTES } from '../../constants';
 import { TaskCreateSchema, type Task, type TaskCreateDto } from '../../schemas';
 import { http } from '../http';
 import { taskQueryKeys } from './task-query-key';
 
 const createTasktFn = async (newtask: TaskCreateDto) => {
-  const response = await http.post<Task>(API_ROUTES.TASKS, newtask);
+  const response = await http.post<Task>(API_ROUTES.TASKS, newtask, {
+    withAuth: true,
+  });
   return TaskCreateSchema.parse(response);
 };
 
@@ -30,7 +33,9 @@ export const useCreateTask = () => {
 
       return { previousTasks };
     },
-
+    onSuccess: () => {
+      toast.success('Task created!');
+    },
     onError: (_error, _variables, context) => {
       if (context?.previousTasks) {
         queryClient.setQueryData(taskQueryKeys.all, context.previousTasks);

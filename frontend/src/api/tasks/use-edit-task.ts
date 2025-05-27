@@ -3,6 +3,7 @@ import {
   useQueryClient,
   type UseMutationOptions,
 } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
 import { type Task, TaskSchema, type TaskUpdateDto } from '../../schemas';
 import { http } from '../http';
 import { taskQueryKeys } from './task-query-key';
@@ -22,6 +23,7 @@ export function useEditTask(
     const response = await http.put<Task>(
       API_ROUTES.TASK(updatedTask.id),
       updatedTask,
+      { withAuth: true },
     );
 
     return TaskSchema.parse(response);
@@ -49,6 +51,7 @@ export function useEditTask(
 
     onSuccess: (...args) => {
       options?.onSuccess?.(...args);
+      toast.success('Task updated!');
     },
 
     onError: (_error, updatedTask, context) => {

@@ -5,7 +5,9 @@ import { type ProjectWithOwnerDto } from '../../schemas';
 import { API_ROUTES } from '../../constants';
 
 const getProjectsFn = async () => {
-  return http.get<ProjectWithOwnerDto[]>(API_ROUTES.PROJECTS);
+  return http.get<ProjectWithOwnerDto[]>(API_ROUTES.PROJECTS, {
+    withAuth: true,
+  });
 };
 
 export const useProjects = () => {
