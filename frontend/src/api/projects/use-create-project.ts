@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
 import {
   type ProjectCreateDto,
   type ProjectResponseDto,
@@ -42,7 +43,9 @@ export const useCreateProject = () => {
 
       return { previousProjects };
     },
-    onSuccess: () => {}, // todo: add toastify
+    onSuccess: () => {
+      toast.success('Project created!');
+    },
     onError: (_error, _variables, context) => {
       if (context?.previousProjects) {
         queryClient.setQueryData(

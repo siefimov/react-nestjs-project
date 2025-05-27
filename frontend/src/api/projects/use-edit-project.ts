@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
 import { http } from '../http';
 import { projectQueryKeys } from './project-query-keys';
 import {
@@ -47,7 +48,9 @@ export function useEditProject() {
 
       return { previousProject };
     },
-
+    onSuccess: () => {
+      toast.success('Project updated')
+    },
     onError: (_error, updatedProject, context) => {
       queryClient.setQueryData(
         projectQueryKeys.detail(updatedProject.id),

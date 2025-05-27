@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
 import { API_ROUTES } from '../../constants';
 import { TaskCreateSchema, type Task, type TaskCreateDto } from '../../schemas';
 import { http } from '../http';
@@ -30,7 +31,9 @@ export const useCreateTask = () => {
 
       return { previousTasks };
     },
-
+    onSuccess: () => {
+      toast.success('Task created!');
+    },
     onError: (_error, _variables, context) => {
       if (context?.previousTasks) {
         queryClient.setQueryData(taskQueryKeys.all, context.previousTasks);

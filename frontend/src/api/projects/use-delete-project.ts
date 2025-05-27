@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
 import { http } from '../http';
 import { projectQueryKeys } from './project-query-keys';
 import { API_ROUTES } from '../../constants';
@@ -21,7 +22,7 @@ export const useDeleteProject = ({ closeModal }: Props) => {
       await queryClient.cancelQueries({ queryKey: projectQueryKeys.all });
     },
     onSuccess: () => {
-      console.log('Delete user successfuly');
+      toast.success('Delete user successfuly');
     },
     onError: () => {
       queryClient.invalidateQueries({ queryKey: projectQueryKeys.all });

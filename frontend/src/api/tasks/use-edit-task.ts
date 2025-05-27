@@ -3,6 +3,7 @@ import {
   useQueryClient,
   type UseMutationOptions,
 } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
 import { type Task, TaskSchema, type TaskUpdateDto } from '../../schemas';
 import { http } from '../http';
 import { taskQueryKeys } from './task-query-key';
@@ -49,6 +50,7 @@ export function useEditTask(
 
     onSuccess: (...args) => {
       options?.onSuccess?.(...args);
+      toast.success('Task updated!');
     },
 
     onError: (_error, updatedTask, context) => {

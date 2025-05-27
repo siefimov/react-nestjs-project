@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
 import { http } from '../http';
 import { API_ROUTES } from '../../constants';
 import { taskQueryKeys } from './task-query-key';
@@ -16,7 +17,9 @@ export const useDeleteTask = () => {
     onMutate: async () => {
       await queryClient.cancelQueries({ queryKey: taskQueryKeys.all });
     },
-    onSuccess: () => {}, // add tostify
+    onSuccess: () => {
+      toast.success('Task deleted!');
+    },
     onError: () => {
       queryClient.invalidateQueries({ queryKey: taskQueryKeys.all });
     },
