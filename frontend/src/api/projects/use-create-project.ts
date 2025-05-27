@@ -14,6 +14,7 @@ const createProjectFn = async (newPropect: ProjectCreateDto) => {
   const response = await http.post<ProjectResponseDto>(
     API_ROUTES.PROJECTS,
     newPropect,
+    { withAuth: true },
   );
   return ProjectCreateSchema.parse(response);
 };

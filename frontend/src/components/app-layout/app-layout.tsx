@@ -1,10 +1,12 @@
 import { Outlet, useNavigate } from 'react-router';
 import clsx from 'clsx';
+import { useAuthInit } from '../../api';
 import { useAuthStore } from '../../store/auth-store';
 import { APP_ROUTES } from '../../constants';
 import styles from './app-layout.module.scss';
 
 export const AppLayout = () => {
+  useAuthInit();
   const { user, logout } = useAuthStore(state => state);
   const navigte = useNavigate();
 
