@@ -4,7 +4,7 @@ import { UserSchema } from '../user';
 export const ProjectCreateSchema = z.object({
   title: z.string().min(1, 'Title is required'),
   description: z.string().optional(),
-  ownerId: z.number().int().min(1, 'Owner is required'),
+  ownerId: z.number().int().min(1).optional(),
 });
 
 export const ProjectUpdateSchema = ProjectCreateSchema.partial().extend({

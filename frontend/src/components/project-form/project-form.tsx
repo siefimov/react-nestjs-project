@@ -5,6 +5,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { APP_ROUTES } from '../../constants';
 import styles from './project-form.module.scss';
 import { type ProjectCreateDto, ProjectCreateSchema } from '../../schemas';
+import { useAuthStore } from '../../store/auth-store';
+import { toast } from 'react-toastify';
 
 type Props = {
   onSubmit: (data: ProjectCreateDto) => void;
@@ -21,6 +23,7 @@ export const ProjectForm: React.FC<Props> = ({ onSubmit }) => {
     resolver: zodResolver(ProjectCreateSchema),
   });
 
+  const user = useAuthStore(state => state.user);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,7 +31,11 @@ export const ProjectForm: React.FC<Props> = ({ onSubmit }) => {
   }, [setFocus]);
 
   const handleFormSubmit = (data: ProjectCreateDto) => {
-    onSubmit(data);
+    if (!user) {
+      toast.error('You must be logged in to create a project');
+      return;
+    }
+    onSubmit({ ...data, ownerId: user.id });
     reset();
     setFocus('title');
   };
@@ -57,7 +64,7 @@ export const ProjectForm: React.FC<Props> = ({ onSubmit }) => {
           {...register('description')}
         />
       </div>
-      <div className={styles['project-form__field']}>
+      {/* <div className={styles['project-form__field']}>
         <label className={styles['project-form__label']}>Owner ID</label>
         <input
           type="number"
@@ -69,7 +76,7 @@ export const ProjectForm: React.FC<Props> = ({ onSubmit }) => {
             {errors.ownerId.message}
           </span>
         )}
-      </div>
+      </div> */}
       <div className={styles['project-form__actions']}>
         <button type="submit" disabled={isSubmitting}>
           Create Project
