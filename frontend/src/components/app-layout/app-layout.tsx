@@ -1,36 +1,34 @@
-import { Link, Outlet } from 'react-router';
-import styles from './app-layout.module.scss';
+import { Outlet, useNavigate } from 'react-router';
+import clsx from 'clsx';
+import { useAuthStore } from '../../store/auth-store';
 import { APP_ROUTES } from '../../constants';
+import styles from './app-layout.module.scss';
 
 export const AppLayout = () => {
+  const { user, logout } = useAuthStore(state => state);
+  const navigte = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigte(APP_ROUTES.LOGIN);
+  };
+
   return (
     <div className={styles['app-layout']}>
-      <header className={styles['app-layout__header']}>
-        <h1 className={styles['app-layout__title']}>
-          Mini Project Management App
-        </h1>
+      <header className={clsx(styles['app-layout__header'], styles['header'])}>
+        <h1 className={styles['header__title']}>Mini Project Management App</h1>
+        {user && (
+          <div className={styles['header__user-block']}>
+            <span className={styles['header__name']}>
+              Welcome, {user.name}!
+            </span>
+            <button className={styles['header__logout']} onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
+        )}
       </header>
-      <div className={styles['app-layout__body']}>
-        <aside className={styles['app-layout__sidebar']}>
-          <nav className={styles['app-layout__nav']}>
-            <ul className={styles['app-layout__nav-list']}>
-              <li className={styles['app-layout__nav-item']}>
-                <Link to={APP_ROUTES.PROJECTS} className={styles['app-layout__nav-link']}>
-                  Projects
-                </Link>
-              </li>
-              <li className={styles['app-layout__nav-item']}>
-                <Link to={APP_ROUTES.PROJECT_CREATE} className={styles['app-layout__nav-link']}>
-                  Create Project
-                </Link>
-              </li>
-            </ul>
-          </nav>
-        </aside>
-        <main className={styles['app-layout__main']}>
-          <Outlet />
-        </main>
-      </div>
+      <Outlet />
     </div>
   );
 };
