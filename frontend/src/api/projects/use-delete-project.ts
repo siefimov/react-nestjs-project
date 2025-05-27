@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { http } from '../http';
 import { projectQueryKeys } from './project-query-keys';
 import { API_ROUTES } from '../../constants';
+import { AxiosError } from 'axios';
 
 type Props = {
   closeModal: () => void;
@@ -26,7 +27,14 @@ export const useDeleteProject = ({ closeModal }: Props) => {
     onSuccess: () => {
       toast.success('Delete user successfuly');
     },
-    onError: () => {
+    onError: (error: AxiosError) => {
+      const message =
+        typeof error?.response?.data === 'object' &&
+        error?.response?.data !== null &&
+        'message' in error.response.data
+          ? (error.response.data as { message: string }).message
+          : 'Unknown error';
+      toast.error(message);
       queryClient.invalidateQueries({ queryKey: projectQueryKeys.all });
     },
     onSettled: () => {
