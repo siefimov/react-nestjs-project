@@ -5,7 +5,7 @@ import type { EditableProjectField } from '../../../../types';
 import { APP_ROUTES, EDITABLE_PROJECT_FIELDS } from '../../../../constants';
 import { ProjectFieldEditable } from '../project-field-editable';
 import { getFormattedDate } from '../../../../utils';
-import { AiOutlineDelete, AiOutlineEdit } from '../../../icons';
+import { AiOutlineDelete } from '../../../icons';
 import styles from './project-list-item.module.scss';
 
 type Props = {
@@ -100,13 +100,6 @@ export const ProjectListItem: React.FC<Props> = memo(
         <td>{getFormattedDate(project.createdAt)}</td>
         <td>
           <span className={styles['project-list__actions']}>
-            <Link
-              to={APP_ROUTES.EDIT(project.id)}
-              className={styles['project-list__icon-btn']}
-              aria-label="Edit"
-            >
-              <AiOutlineEdit />
-            </Link>
             <button
               className={styles['project-list__icon-btn']}
               onClick={() => showDeleteModal(project.id)}
