@@ -4,15 +4,26 @@ import { Project } from './project.entity';
 import { Repository } from 'typeorm';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
+import { User } from '../users';
 
 @Injectable()
 export class ProjectsService {
   constructor(
     @InjectRepository(Project)
-    private projectsRepository: Repository<Project>,
+    private readonly projectsRepository: Repository<Project>,
+    @InjectRepository(User)
+    private readonly usersRepository: Repository<User>,
   ) {}
 
-  async create(createProjectDto: CreateProjectDto): Promise<Project> {
+  async create(
+    createProjectDto: CreateProjectDto,
+    ownerId: number,
+  ): Promise<Project> {
+    const owner = await this.usersRepository.findOneBy({ id: ownerId });
+    if (!owner) {
+      throw new NotFoundException(`User with ID ${ownerId} not found.`);
+    }
+
     const project = this.projectsRepository.create(createProjectDto);
     return this.projectsRepository.save(project);
   }
