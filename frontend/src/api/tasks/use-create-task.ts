@@ -6,7 +6,9 @@ import { http } from '../http';
 import { taskQueryKeys } from './task-query-key';
 
 const createTasktFn = async (newtask: TaskCreateDto) => {
-  const response = await http.post<Task>(API_ROUTES.TASKS, newtask);
+  const response = await http.post<Task>(API_ROUTES.TASKS, newtask, {
+    withAuth: true,
+  });
   return TaskCreateSchema.parse(response);
 };
 

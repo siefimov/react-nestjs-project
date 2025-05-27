@@ -12,7 +12,9 @@ export const useDeleteProject = ({ closeModal }: Props) => {
   const queryClient = useQueryClient();
 
   const deteleFn = async (id: number) => {
-    const response = await http.delete<void>(API_ROUTES.PROJECT(id));
+    const response = await http.delete<void>(API_ROUTES.PROJECT(id), {
+      withAuth: true,
+    });
     return response;
   };
 

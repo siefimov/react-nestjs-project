@@ -6,7 +6,9 @@ import { API_ROUTES } from '../../constants';
 
 export const useUser = (id: number) => {
   const getUserFn = async () => {
-    const response = await http.get<User>(API_ROUTES.USER(id));
+    const response = await http.get<User>(API_ROUTES.USER(id), {
+      withAuth: true,
+    });
     return UserSchema.parse(response);
   };
 

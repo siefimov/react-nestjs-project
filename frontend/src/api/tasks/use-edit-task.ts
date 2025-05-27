@@ -23,6 +23,7 @@ export function useEditTask(
     const response = await http.put<Task>(
       API_ROUTES.TASK(updatedTask.id),
       updatedTask,
+      { withAuth: true },
     );
 
     return TaskSchema.parse(response);

@@ -8,7 +8,9 @@ export const useDeleteTask = () => {
   const queryClient = useQueryClient();
 
   const deteleFn = async (id: number) => {
-    const response = await http.delete<void>(API_ROUTES.TASK(id));
+    const response = await http.delete<void>(API_ROUTES.TASK(id), {
+      withAuth: true,
+    });
     return response;
   };
 

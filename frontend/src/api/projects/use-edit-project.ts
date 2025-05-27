@@ -17,6 +17,7 @@ export function useEditProject() {
     const response = await http.put<ProjectResponseDto>(
       API_ROUTES.PROJECT(updatedProject.id),
       updatedProject,
+      { withAuth: true },
     );
 
     return ProjectUpdateSchema.parse(response);
@@ -49,7 +50,7 @@ export function useEditProject() {
       return { previousProject };
     },
     onSuccess: () => {
-      toast.success('Project updated')
+      toast.success('Project updated');
     },
     onError: (_error, updatedProject, context) => {
       queryClient.setQueryData(

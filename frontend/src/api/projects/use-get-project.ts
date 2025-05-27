@@ -11,6 +11,7 @@ export const useProject = () => {
   const getProjectFn = async () => {
     const response = await http.get<ProjectResponseDto>(
       API_ROUTES.PROJECT(Number(id)),
+      { withAuth: true },
     );
     return ProjectResponseSchema.parse(response);
   };
