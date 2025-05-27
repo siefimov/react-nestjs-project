@@ -8,5 +8,6 @@ export { LoginForm } from './login-form';
 export { RegisterForm } from './register-form';
 export { PrivateLayout } from './private-layout';
 export { ProjectForm } from './project-form';
+export { Header } from './header';
 
 export * from './icons';
