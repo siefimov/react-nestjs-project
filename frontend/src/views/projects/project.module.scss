@@ -2,9 +2,6 @@
 
 .project-page {
   background: $color-bg-alt;
-  border-radius: $radius;
-  box-shadow: 0 1px 4px 0 rgba(30, 41, 59, 0.04);
-  padding-inline: $spacing-md;
   margin: 0 auto;
 
   &__header {
@@ -13,5 +10,11 @@
     gap: $spacing-lg;
     align-items: flex-start;
     margin-bottom: $spacing-lg;
+
+    @media (max-width: 1090px) {
+      flex-direction: column;
+      gap: $spacing-xs;
+      margin-bottom: $spacing-sm;
+    }
   }
 }

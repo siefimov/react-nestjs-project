@@ -64,19 +64,6 @@ export const ProjectForm: React.FC<Props> = ({ onSubmit }) => {
           {...register('description')}
         />
       </div>
-      {/* <div className={styles['project-form__field']}>
-        <label className={styles['project-form__label']}>Owner ID</label>
-        <input
-          type="number"
-          className={styles['project-form__input']}
-          {...register('ownerId', { valueAsNumber: true })}
-        />
-        {errors.ownerId && (
-          <span className={styles['project-form__error']}>
-            {errors.ownerId.message}
-          </span>
-        )}
-      </div> */}
       <div className={styles['project-form__actions']}>
         <button type="submit" disabled={isSubmitting}>
           Create Project

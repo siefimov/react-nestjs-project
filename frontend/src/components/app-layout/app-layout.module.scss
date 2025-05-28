@@ -1,42 +1,13 @@
 @use '../../styles/_variables.scss' as *;
 
 .app-layout {
-  width: 100vw;
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
   max-width: none;
   margin: 0;
-  padding: $spacing-lg $spacing-md;
   background: $color-bg-alt;
   border-radius: 0;
   box-shadow: none;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: $spacing-md;
-  border-bottom: 1px solid $color-border;
-
-  &__title {
-    margin: 0;
-    font-size: $font-size-xl;
-    text-align: left;
-    color: $color-primary;
-    font-weight: 700;
-    letter-spacing: 0.01em;
-  }
-
-  &__user-block {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-  }
-
-  &__logout {
-    background-color: $color-bg-light;
-    border: 1px solid $color-border;
-    color: $color-primary;
-    transition: $transition;
-  }
+  overflow-x: hidden;
 }

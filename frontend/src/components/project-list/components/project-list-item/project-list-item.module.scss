@@ -1,8 +1,9 @@
-@use'../../../../styles/variables' as *;
+@use '../../../../styles/variables' as *;
 
 .project-list__actions {
   display: flex;
   gap: $spacing-xs;
+  justify-content: center;
   align-items: center;
 }
 
@@ -11,7 +12,7 @@
   font-weight: 500;
   font-size: $font-size-base;
   &:hover {
-    text-decoration: underline;
+    text-decoration: none;
     color: $color-primary;
   }
 }
@@ -21,12 +22,17 @@
   border: none;
   padding: 0.2em;
   color: $color-text-light;
-  transition: color $transition;
+  border: 1px solid transparent;
+  transition: color $transition, border-color $transition;
   font-size: 1.2em;
   display: flex;
   align-items: center;
   justify-content: center;
   &:hover {
-    color: $color-danger;
+    &:hover:not(:disabled) {
+      color: $color-danger;
+      border: 1px solid $color-danger;
+      background: none;
+    }
   }
 }

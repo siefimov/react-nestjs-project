@@ -1,4 +1,10 @@
+@use '../styles/variables' as *;
 /* Modern CSS Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 html,
 body,
 div,
@@ -94,6 +100,7 @@ html {
 body {
   min-height: 100vh;
   background: $color-bg;
+  margin: 0;
 }
 ol,
 ul {
