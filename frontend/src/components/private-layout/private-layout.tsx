@@ -1,4 +1,4 @@
-import { Outlet, Link } from 'react-router';
+import { Outlet, Link, NavLink } from 'react-router';
 import { APP_ROUTES } from '../../constants';
 import styles from './private-layout.module.scss';
 
@@ -8,20 +8,30 @@ export const PrivateLayout: React.FC = () => (
       <nav className={styles['app-layout__nav']}>
         <ul className={styles['app-layout__nav-list']}>
           <li className={styles['app-layout__nav-item']}>
-            <Link
+            <NavLink
               to={APP_ROUTES.PROJECTS}
-              className={styles['app-layout__nav-link']}
+              className={({ isActive }) =>
+                [
+                  styles['app-layout__nav-link'],
+                  isActive ? styles['app-layout__nav-link--active'] : '',
+                ].join(' ')
+              }
             >
               Projects
-            </Link>
+            </NavLink>
           </li>
           <li className={styles['app-layout__nav-item']}>
-            <Link
+           <NavLink
               to={APP_ROUTES.PROJECT_CREATE}
-              className={styles['app-layout__nav-link']}
+              className={({ isActive }) =>
+                [
+                  styles['app-layout__nav-link'],
+                  isActive ? styles['app-layout__nav-link--active'] : '',
+                ].join(' ')
+              }
             >
               Create Project
-            </Link>
+            </NavLink>
           </li>
         </ul>
       </nav>

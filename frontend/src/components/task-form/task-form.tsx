@@ -55,12 +55,13 @@ export const TaskForm: React.FC<Props> = ({ id }) => {
       className={styles['task-form']}
       onSubmit={handleSubmit(handleFormSubmit)}
     >
-      <div className="task-form__field-wrapper">
+      <div className={styles['task-form__field-wrapper']}>
         <div className={styles['task-form__field']}>
-          <label className={styles['task-form__label']}>Title:</label>
+          <label className={styles['task-form__label']}></label>
           <input
             type="text"
             className={styles['task-form__input']}
+            placeholder="title"
             {...register('title')}
           />
           {errors.title && (
@@ -70,9 +71,10 @@ export const TaskForm: React.FC<Props> = ({ id }) => {
           )}
         </div>
         <div className={styles['task-form__field']}>
-          <label className={styles['task-form__label']}>Description:</label>
+          <label className={styles['task-form__label']}></label>
           <textarea
             className={styles['task-form__textarea']}
+            placeholder="description"
             {...register('description')}
           />
           {errors.description && (
@@ -82,9 +84,9 @@ export const TaskForm: React.FC<Props> = ({ id }) => {
           )}
         </div>
       </div>
-      <div className="task-form__field-wrapper">
+      <div className={styles['task-form__field-wrapper']}>
         <div className={styles['task-form__field']}>
-          <label className={styles['task-form__label']}>Assignee:</label>
+          <label className={styles['task-form__label']}></label>
           <Controller
             control={control}
             name="assignedUserId"
@@ -114,7 +116,7 @@ export const TaskForm: React.FC<Props> = ({ id }) => {
           )}
         </div>
         <div className={styles['task-form__field']}>
-          <label className={styles['task-form__label']}>Status:</label>
+          <label className={styles['task-form__label']}></label>
           <select
             className={styles['task-form__select']}
             {...register('status')}

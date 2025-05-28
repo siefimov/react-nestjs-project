@@ -1,5 +1,13 @@
 @use '../../styles/variables' as *;
 
+.register-wrapper {
+   display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  height: 100%;
+}
+
 .register-form {
   background: $color-bg-alt;
   padding: $spacing-lg;

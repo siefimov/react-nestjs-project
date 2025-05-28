@@ -50,4 +50,8 @@
 
 button.project-form__button-back {
   background-color: $color-primary-light;
+
+  &:hover {
+    background-color: $color-primary;
+  }
 }

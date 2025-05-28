@@ -4,13 +4,21 @@
   background: $color-bg-light;
   border-radius: $radius;
   box-shadow: 0 2px 12px 0 rgba(99, 102, 241, 0.08);
-  padding: 0 $spacing-md;
+  padding: $spacing-xs $spacing-sm;
   min-width: 320px;
-  max-width: 400px;
+  width: 100%;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: $spacing-md;
+  gap: $spacing-xs;
+
+  @media (max-width: 1090px) {
+    flex-direction: row;
+    max-width: none;
+    min-width: none;
+    justify-content: space-between;
+    margin-bottom: $spacing-sm;
+  }
 }
 
 .project-info__title {
@@ -29,6 +37,10 @@
   align-items: baseline;
   gap: $spacing-xs;
   word-break: break-word;
+
+  @media (max-width: 1090px) {
+    flex-direction: column;
+  }
 }
 
 .project-info__label {

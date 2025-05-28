@@ -1,14 +1,14 @@
 @use '../../styles/_variables.scss' as *;
 
 .projects-page {
-  margin: $spacing-lg auto;
+  margin: 0 auto;
 }
 
 .projects-page__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: $spacing-lg;
+  margin-bottom: $spacing-md;
 }
 
 .projects-page__title {

@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use '../../styles/_variables.scss' as *;
 
 .delete-modal__backdrop {
@@ -46,6 +47,6 @@
   background: $color-danger;
   color: #fff;
   &:hover {
-    background: darken($color-danger, 10%);
+    background: color.adjust($color-danger, $lightness: -10%);
   }
 }
