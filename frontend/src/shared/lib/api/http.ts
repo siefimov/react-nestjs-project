@@ -1,5 +1,5 @@
 import { apiClient } from './api-client';
-import { HTTP_METHODS } from '../constants';
+import { HTTP_METHODS } from '../../../constants';
 type RequestMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 interface RequestConfig {
