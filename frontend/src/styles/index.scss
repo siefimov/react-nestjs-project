@@ -1,0 +1,50 @@
+@use './reset.scss' as *;
+@use './variables.scss' as *;
+
+body {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  color: $color-text;
+  background: $color-bg;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: $color-primary;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+a {
+  color: $color-primary;
+  transition: color $transition;
+  text-decoration: none;
+
+  &:hover {
+    color: $color-primary-light;
+  }
+}
+
+button {
+  cursor: pointer;
+  border-radius: $radius;
+  padding: $spacing-xs $spacing-md;
+  background: $color-primary;
+  color: #fff;
+  border: none;
+  font-size: $font-size-base;
+  font-family: $font-family-base;
+  transition: background $transition;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &:hover:not(:disabled) {
+    background: $color-primary-light;
+  }
+}

@@ -1,0 +1,60 @@
+@use '@/styles/variables.scss' as *;
+
+.project-form {
+  background: $color-bg-alt;
+  border-radius: $radius;
+  box-shadow: 0 1px 4px 0 rgba(30, 41, 59, 0.04);
+  padding: $spacing-lg $spacing-md;
+  max-width: 500px;
+  margin: $spacing-lg auto;
+
+  &__field {
+    margin-bottom: $spacing-md;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+  }
+
+  &__label {
+    font-weight: 500;
+    color: $color-text-light;
+    font-size: $font-size-sm;
+  }
+
+  &__input,
+  &__textarea {
+    border: 1px solid $color-border;
+    border-radius: $radius;
+    padding: $spacing-xs;
+    font-size: $font-size-base;
+    background: $color-bg;
+    color: $color-text;
+    transition: border $transition;
+
+    &:focus {
+      border-color: $color-primary;
+      outline: none;
+    }
+  }
+
+  &__error {
+    color: $color-danger;
+    font-size: $font-size-xs;
+  }
+
+  &__actions {
+    display: flex;
+    gap: $spacing-sm;
+    margin-top: $spacing-md;
+  }
+
+  button.project-form {
+    &__button-back {
+      background-color: $color-primary-light;
+
+      &:hover {
+        background-color: $color-primary;
+      }
+    }
+  }
+}

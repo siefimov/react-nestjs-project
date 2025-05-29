@@ -1,0 +1,20 @@
+@use '@/styles/_variables.scss' as *;
+
+.project-page {
+  background: $color-bg-alt;
+  margin: 0 auto;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    gap: $spacing-lg;
+    align-items: flex-start;
+    margin-bottom: $spacing-lg;
+
+    @media (max-width: 1090px) {
+      flex-direction: column;
+      gap: $spacing-xs;
+      margin-bottom: $spacing-sm;
+    }
+  }
+}

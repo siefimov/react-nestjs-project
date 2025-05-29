@@ -1,0 +1,75 @@
+import { useState, useCallback } from 'react';
+import {
+  type EditableProjectField,
+  type ProjectWithOwnerDto,
+  useEditProject,
+} from '@/features/projects';
+
+type EditingState = {
+  id: number | null;
+  field: EditableProjectField | null;
+  value: string;
+};
+
+type UseProjectEditingResult = {
+  editing: EditingState;
+  startEdit: (
+    project: ProjectWithOwnerDto,
+    field: EditableProjectField,
+  ) => void;
+  handleEditChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleEditSubmit: (project: ProjectWithOwnerDto) => void;
+  resetEditing: () => void;
+};
+
+export const useProjectEditing = (): UseProjectEditingResult => {
+  const [editing, setEditing] = useState<EditingState>({
+    id: null,
+    field: null,
+    value: '',
+  });
+  const editProjectMutation = useEditProject();
+
+  const startEdit = useCallback(
+    (project: ProjectWithOwnerDto, field: EditableProjectField) => {
+      setEditing({ id: project.id, field, value: project[field] ?? '' });
+    },
+    [setEditing],
+  );
+
+  const handleEditChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setEditing(prev => ({ ...prev, value: e.target.value }));
+    },
+    [setEditing],
+  );
+
+  const handleEditSubmit = useCallback(
+    (project: ProjectWithOwnerDto) => {
+      if (
+        editing.id === project.id &&
+        editing.field &&
+        editing.value.trim() !== project[editing.field]
+      ) {
+        editProjectMutation.mutate({
+          id: project.id,
+          [editing.field]: editing.value,
+        });
+      }
+      setEditing({ id: null, field: null, value: '' });
+    },
+    [editing, editProjectMutation, setEditing],
+  );
+
+  const resetEditing = useCallback(() => {
+    setEditing({ id: null, field: null, value: '' });
+  }, [setEditing]);
+
+  return {
+    editing,
+    startEdit,
+    handleEditChange,
+    handleEditSubmit,
+    resetEditing,
+  };
+};
