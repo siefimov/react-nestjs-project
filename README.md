@@ -132,15 +132,34 @@ VITE_API_URL=http://localhost:3000
 
 ---
 
-### 4. Start PostgreSQL
+### 4. Run Database Migrations
+
+Before running the application, apply database migrations to create all tables:
+
+```sh
+cd backend
+pnpm migration:run
+```
+
+### 5. Seed the Database (optional, for demo data)
+
+To insert demo data (admin user, demo project, demo tasks), run:
+
+```sh
+pnpm seed
+```
+
+---
+
+### 6. Start PostgreSQL
 
 If running locally (not via Docker), make sure your PostgreSQL server is running and a database named as in your `.env` (`db_title`) exists:
 
-```
+```sh
 createdb <your_db_name>
 ```
 
-### 5. Run the Application
+### 7. Run the Application
 
 **Backend**
 
@@ -181,6 +200,19 @@ If you prefer, you can run the entire stack using Docker and `docker compose`.
    - Swagger Docs: [http://localhost:3000/api/docs](http://localhost:3000/api/docs)
 
 ---
+
+3. RUn migration
+
+```sh
+cd backend
+pnpm migration:run
+```
+
+4. To insert demo data (admin user, demo project, demo tasks), run:
+
+```sh
+pnpm seed
+```
 
 ### ⏯️ Starting and Stopping Containers (Next Runs)
 
