@@ -17,12 +17,27 @@ export class TasksService {
     return this.tasksRepository.save(task);
   }
 
-  async findAll(projectId?: number): Promise<Task[]> {
+  async findAll(
+    projectId?: number,
+    status?: string,
+    page: number = 1,
+    limit: number = 10,
+  ): Promise<{ tasks: Task[]; total: number }> {
+    const where: any = {};
     if (projectId) {
-      return this.tasksRepository.find({ where: { projectId } });
+      where.projectId = projectId;
     }
 
-    return this.tasksRepository.find();
+    if (status) {
+      where.status = status;
+    }
+    const [tasks, total] = await this.tasksRepository.findAndCount({
+      where,
+      skip: (page - 1) * limit,
+      take: limit,
+    });
+
+    return { tasks, total };
   }
 
   async findOne(id: number): Promise<Task> {

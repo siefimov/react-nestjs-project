@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   TaskUpdateSchema,
   type Task,
@@ -7,9 +7,12 @@ import {
 import { useEditTask, useTasks, useUsers } from '../../../../api';
 import { TaskTableRow } from '../task-table-row/task-table-row';
 import { useSortedItems } from '../../../../utils';
+import type { TaskStatus } from '../../../../types';
 
 type Prop = {
   projectId: number;
+  filters: { status?: TaskStatus; page: number; limit: number };
+  onTotalChange: (total: number) => void;
 };
 
 type InlineEditableTaskField = 'title' | 'description';
@@ -20,15 +23,38 @@ type Editing = {
   value: string;
 };
 
-export const TaskTableBody: React.FC<Prop> = ({ projectId }) => {
+export const TaskTableBody: React.FC<Prop> = ({
+  projectId,
+  filters,
+  onTotalChange,
+}) => {
   const [editing, setEditing] = useState<Editing>({
     id: null,
     field: null,
     value: '',
   });
-  const { data: tasks, isLoading, isError, error } = useTasks(projectId);
+  const { limit, page, status } = filters;
+
+  const {
+    data: tasks,
+    isLoading,
+    isError,
+    error,
+  } = useTasks({ projectId, status, limit, page });
+
+  useEffect(() => {
+    if (onTotalChange && typeof tasks?.total === 'number') {
+      onTotalChange(tasks.total);
+    }
+  }, []);
+
   const { data: users } = useUsers();
-  const sortedTasks = useSortedItems<Task>(tasks ?? [], t => t.createdAt);
+
+  const sortedTasks = useSortedItems<Task>(
+    tasks?.tasks ?? [],
+    t => t.createdAt,
+  );
+
   const editTask = useEditTask({
     onSuccess: () => setEditing({ id: null, field: null, value: '' }),
   });

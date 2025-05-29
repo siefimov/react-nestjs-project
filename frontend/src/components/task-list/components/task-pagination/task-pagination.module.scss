@@ -1,0 +1,36 @@
+@use 'sass:color';
+@use '../../../../styles/variables' as *;
+
+.task-list__pagination {
+  margin: 20px auto;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  &__button {
+    background-color: $color-bg-alt;
+
+    &:hover:not(:disabled) {
+      background-color: $color-bg-alt;
+    }
+
+    & svg {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid $color-primary;
+      border-radius: 60%;
+      width: 40px;
+      height: 40px;
+      color: $color-primary;
+      background-color: $color-bg-alt;
+
+      &:hover {
+        background-color: color.change($color-primary-light, $alpha: 0.6);
+      }
+    }
+  }
+}

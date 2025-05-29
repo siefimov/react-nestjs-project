@@ -6,16 +6,17 @@
   box-shadow: 0 2px 12px 0 rgba(99, 102, 241, 0.08);
   padding: $spacing-xs $spacing-sm;
   min-width: 320px;
-  width: 100%;
   margin: 0;
   display: flex;
   flex-direction: column;
   gap: $spacing-xs;
+  flex-grow: 0;
 
   @media (max-width: 1090px) {
     flex-direction: row;
     max-width: none;
     min-width: none;
+    width: 100%;
     justify-content: space-between;
     margin-bottom: $spacing-sm;
   }

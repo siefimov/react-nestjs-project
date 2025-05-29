@@ -1,19 +1,30 @@
 import { useQuery } from '@tanstack/react-query';
-import { TaskSchema, type Task } from '../../schemas';
+import {
+  TaskSchema,
+  type GetTasksParams,
+  type GetTasksResponse,
+} from '../../schemas';
 import { http } from '../http';
 import { taskQueryKeys } from './task-query-key';
 import { API_ROUTES } from '../../constants';
 
-const getTasksFn = async (projectId: number) => {
-  const data = await http.get<Task[]>(API_ROUTES.TASKS_BY_PROJECT(projectId), {
-    withAuth: true,
-  });
-  return TaskSchema.array().parse(data);
+const getTasksFn = async (params: GetTasksParams) => {
+  const data = await http.get<GetTasksResponse>(
+    API_ROUTES.TASKS,
+    {
+      withAuth: true,
+      params,
+    },
+  );
+  return {
+    tasks: TaskSchema.array().parse(data.tasks),
+    total: data.total,
+  };
 };
 
-export const useTasks = (projectId: number) => {
-  return useQuery<Task[]>({
-    queryKey: taskQueryKeys.byProject(projectId),
-    queryFn: () => getTasksFn(projectId),
+export const useTasks = (params: GetTasksParams) => {
+  return useQuery<GetTasksResponse>({
+    queryKey: taskQueryKeys.list(params),
+    queryFn: () => getTasksFn(params),
   });
 };

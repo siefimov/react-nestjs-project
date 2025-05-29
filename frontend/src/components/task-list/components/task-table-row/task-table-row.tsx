@@ -1,3 +1,4 @@
+import Select from 'react-select';
 import { getFormattedDate } from '../../../../utils';
 import type { Task, TaskUpdateDto, User } from '../../../../schemas';
 import type { TaskStatus } from '../../../../types';
@@ -23,6 +24,12 @@ type Props = {
   handleTaskChange: (changes: TaskUpdateDto) => void;
 };
 
+const statusOptions = [
+  { value: 'todo', label: 'todo', color: '#fbbf24' },
+  { value: 'in_progress', label: 'in progress', color: '#3b82f6' },
+  { value: 'done', label: 'done', color: '#22c55e' },
+];
+
 export const TaskTableRow: React.FC<Props> = ({
   task,
   index,
@@ -32,6 +39,11 @@ export const TaskTableRow: React.FC<Props> = ({
   handleTaskChange,
 }) => {
   const deleteTaskMutation = useDeleteTask();
+
+  const assigneeOptions = users.map(user => ({
+    value: user.id,
+    label: user.name,
+  }));
 
   const handleDeleteTask = useCallback(
     async (id: number) => {
@@ -62,21 +74,7 @@ export const TaskTableRow: React.FC<Props> = ({
 
   const resetEditing = () => {
     setEditing({ id: null, field: null, value: '' });
-  };
-
-  const handleAssigneeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    handleTaskChange({
-      id: task.id,
-      assignedUserId: e.target.value === '' ? null : Number(e.target.value),
-    });
-  };
-
-  const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    handleTaskChange({
-      id: task.id,
-      status: e.target.value as TaskStatus,
-    });
-  };
+  }; 
 
   return (
     <tr className={styles['task-list__row']}>
@@ -101,24 +99,43 @@ export const TaskTableRow: React.FC<Props> = ({
         placeholder="add description"
       />
       <td className={styles['task-list__cell']}>
-        <select
-          value={task.assignedUserId ?? ''}
-          onChange={handleAssigneeChange}
-        >
-          <option value="">assign user</option>
-          {users.map(user => (
-            <option key={user.id} value={user.id}>
-              {user.name}
-            </option>
-          ))}
-        </select>
+        <Select
+          value={
+            assigneeOptions.find(opt => opt.value === task.assignedUserId) ??
+            null
+          }
+          onChange={option =>
+            handleTaskChange({
+              id: task.id,
+              assignedUserId: option ? option.value : null,
+            })
+          }
+          options={assigneeOptions}
+          isClearable
+          placeholder="assign user"
+        />
       </td>
       <td className={styles['task-list__cell']}>
-        <select value={task.status} onChange={handleStatusChange}>
-          <option value="todo">todo</option>
-          <option value="in_progress">in progress</option>
-          <option value="done">done</option>
-        </select>
+        <Select
+          value={statusOptions.find(opt => opt.value === task.status)}
+          onChange={option =>
+            handleTaskChange({
+              id: task.id,
+              status: option?.value as TaskStatus,
+            })
+          }
+          options={statusOptions}
+          styles={{
+            option: (provided, state) => ({
+              ...provided,
+              color: state.data.color,
+            }),
+            singleValue: (provided, state) => ({
+              ...provided,
+              color: state.data.color,
+            }),
+          }}
+        />
       </td>
       <td className={`${styles['task-list__cell']}`}>
         {getFormattedDate(task.createdAt)}
