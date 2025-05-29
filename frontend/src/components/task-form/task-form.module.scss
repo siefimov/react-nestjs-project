@@ -4,10 +4,9 @@
   display: flex;
   gap: $spacing-md;
   background-color: $color-bg-alt;
-  border-radius: $radius;
-  padding: $spacing-sm $spacing-sm 0 $spacing-sm;
+  border: 1px solid $color-border;
+  padding: $spacing-sm $spacing-sm;
   max-width: 500px;
-  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.06);
 
   @media (max-width: 1090px) {
     max-width: 100%;
@@ -50,7 +49,6 @@
     border-radius: $radius;
     font-size: $font-size-base;
     font-family: $font-family-base;
-    background-color: $color-bg-light;
     color: $color-text;
     transition: border-color $transition, background-color $transition;
     height: 37px;
@@ -60,7 +58,7 @@
       align-items: flex-start;
       text-align: start;
       font-size: $font-size-xs;
-      color: $color-primary-light;
+      color: $color-text-light;
       opacity: 0.5;
       font-style: italic;
     }
@@ -72,7 +70,6 @@
   }
 
   .task-form__select {
-    background-color: $color-bg;
     color: $color-text;
     border: 1px solid $color-border;
     border-radius: $radius;

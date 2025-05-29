@@ -20,4 +20,8 @@
       background: none;
     }
   }
+
+  &__cell-todo {
+    border: 1px solid $color-border;
+  }
 }
