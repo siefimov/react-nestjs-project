@@ -1,10 +1,11 @@
 @use '@/styles/variables' as *;
-/* Modern CSS Reset */
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
+
 html,
 body,
 div,
@@ -93,23 +94,27 @@ video {
   vertical-align: baseline;
   box-sizing: border-box;
 }
+
 html {
   line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
 }
+
 body {
   min-height: 100vh;
   background: $color-bg;
   margin: 0;
 }
+
 ol,
 ul {
   list-style: none;
 }
+
 a {
   text-decoration: none;
   color: inherit;
 }
+
 button,
 input,
 textarea,
@@ -119,6 +124,7 @@ select {
   border: none;
   outline: none;
 }
+
 table {
   border-collapse: collapse;
   border-spacing: 0;

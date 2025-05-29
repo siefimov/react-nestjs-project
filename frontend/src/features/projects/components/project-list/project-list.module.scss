@@ -1,4 +1,4 @@
-@use '@/styles/_variables.scss' as *;
+@use '@/styles/variables.scss' as *;
 
 .project-list {
   width: 100%;
@@ -7,29 +7,29 @@
   box-shadow: 0 1px 4px 0 rgba(30, 41, 59, 0.04);
   margin-top: $spacing-sm;
   overflow-x: auto;
-}
 
-.project-list__table {
-  width: 100%;
-  border-radius: $radius;
-  overflow: hidden;
-  font-size: $font-size-sm;
-}
+  &__table {
+    width: 100%;
+    border-radius: $radius;
+    overflow: hidden;
+    font-size: $font-size-sm;
+  }
 
-.project-list__table th,
-.project-list__table td {
-  padding: $spacing-xs $spacing-xs;
-  border-bottom: 1px solid $color-border;
-  text-align: left;
-}
+  &__table th,
+  &__table td {
+    padding: $spacing-xs $spacing-xs;
+    border-bottom: 1px solid $color-border;
+    text-align: left;
+  }
 
-.project-list__table th {
-  background: $color-bg;
-  color: $color-text-light;
-  font-weight: 600;
-  font-size: $font-size-sm;
-}
+  &__table th {
+    background: $color-bg;
+    color: $color-text-light;
+    font-weight: 600;
+    font-size: $font-size-sm;
+  }
 
-.project-list__table tr:last-child td {
-  border-bottom: none;
+  &__table tr:last-child td {
+    border-bottom: none;
+  }
 }

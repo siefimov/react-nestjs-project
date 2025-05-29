@@ -6,7 +6,7 @@ import {
   type AuthRegisterDto,
   type AuthResponseDto,
   AuthResponseSchema,
-  useAuthStore
+  useAuthStore,
 } from '@/features/auth';
 import { http } from '@/shared/lib/api';
 import { authQueryKeys } from './auth-query-keys';

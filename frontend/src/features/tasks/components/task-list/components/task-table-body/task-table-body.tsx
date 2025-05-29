@@ -47,7 +47,7 @@ export const TaskTableBody: React.FC<Prop> = ({
     if (onTotalChange && typeof tasks?.total === 'number') {
       onTotalChange(tasks.total);
     }
-  }, []);
+  }, [onTotalChange, tasks?.total]);
 
   const { data: users } = useUsers();
 
