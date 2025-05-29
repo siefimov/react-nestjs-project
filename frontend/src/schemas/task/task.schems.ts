@@ -13,6 +13,18 @@ export const TaskSchema = z.object({
   updatedAt: z.string().datetime(),
 });
 
+export const GetTasksParamsSchema = z.object({
+  projectId: z.number(),
+  status: TaskStatusEnum.optional(),
+  page: z.number().optional(),
+  limit: z.number().optional(),
+});
+
+export const GetTasksResponseSchema = z.object({
+  tasks: z.array(TaskSchema),
+  total: z.number(),
+});
+
 export const TaskCreateSchema = z.object({
   title: z.string().min(1).max(100),
   description: z.string().nullable().optional(),
@@ -32,3 +44,5 @@ export const TaskUpdateSchema = TaskCreateSchema.omit({
 export type Task = z.infer<typeof TaskSchema>;
 export type TaskUpdateDto = z.infer<typeof TaskUpdateSchema>;
 export type TaskCreateDto = z.infer<typeof TaskCreateSchema>;
+export type GetTasksParams = z.infer<typeof GetTasksParamsSchema>;
+export type GetTasksResponse = z.infer<typeof GetTasksResponseSchema>;
