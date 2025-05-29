@@ -6,9 +6,9 @@ import {
   type ProjectWithOwnerDto,
   ProjectCreateSchema,
 } from '../../schemas';
-import { http } from '../http';
+import { http } from '../../shared/lib/api/http';
 import { projectQueryKeys } from './project-query-keys';
-import { API_ROUTES } from '../../constants';
+import { API_ROUTES } from '../../shared/constants';
 
 const createProjectFn = async (newPropect: ProjectCreateDto) => {
   const response = await http.post<ProjectResponseDto>(

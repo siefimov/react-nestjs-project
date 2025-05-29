@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
-import { http } from '../http';
+import { http } from '../../shared/lib/api/http';
 import { projectQueryKeys } from './project-query-keys';
 import {
   type ProjectUpdateDto,
@@ -8,7 +8,7 @@ import {
   ProjectUpdateSchema,
   type ProjectWithOwnerDto,
 } from '../../schemas';
-import { API_ROUTES } from '../../constants';
+import { API_ROUTES } from '../../shared/constants';
 
 export function useEditProject() {
   const queryClient = useQueryClient();
