@@ -1,8 +1,10 @@
 @use 'sass:color';
 @use '@/styles/variables' as *;
 
-.task-list__pagination {
-  margin: 20px auto;
+.task-list {
+  &__pagination {
+    margin: 20px auto;
+  }
 }
 .pagination {
   display: flex;

@@ -1,5 +1,5 @@
-@use './_reset.scss' as *;
-@use './_variables.scss' as *;
+@use './reset.scss' as *;
+@use './variables.scss' as *;
 
 body {
   font-family: $font-family-base;
@@ -22,6 +22,7 @@ a {
   color: $color-primary;
   transition: color $transition;
   text-decoration: none;
+
   &:hover {
     color: $color-primary-light;
   }
@@ -37,11 +38,13 @@ button {
   font-size: $font-size-base;
   font-family: $font-family-base;
   transition: background $transition;
-  &:hover:not(:disabled) {
-    background: $color-primary-light;
-  }
+
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+  }
+
+  &:hover:not(:disabled) {
+    background: $color-primary-light;
   }
 }

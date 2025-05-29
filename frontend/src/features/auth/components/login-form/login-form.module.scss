@@ -12,12 +12,11 @@
   background: $color-bg-alt;
   padding: $spacing-lg;
   border-radius: $radius;
-  box-shadow: 0 2px 12px rgba(30, 58, 138, 0.08);
+  box-shadow: 0 2px 12px rgb(30, 58, 138, 0.08);
   max-width: 400px;
   margin: 0 auto;
 
-
-  @media (max-width: 460px) {
+  @media (width <= 460px) {
     margin: 2rem;
     padding: $spacing-sm;
   }
@@ -85,14 +84,16 @@
     font-size: $font-size-sm;
     color: $color-text-light;
 
-    .login-form__link {
-      color: $color-primary;
-      margin-left: 0.5em;
-      text-decoration: underline;
-      transition: color $transition;
+    .login-form {
+      &__link {
+        color: $color-primary;
+        margin-left: 0.5em;
+        text-decoration: underline;
+        transition: color $transition;
 
-      &:hover {
-        color: $color-accent;
+        &:hover {
+          color: $color-accent;
+        }
       }
     }
   }

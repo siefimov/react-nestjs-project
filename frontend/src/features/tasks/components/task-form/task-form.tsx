@@ -36,7 +36,7 @@ export const TaskForm: React.FC<Props> = ({ id }) => {
     };
 
     createTask.mutate(payload, {
-      onError: (err: any) => {
+      onError: (err) => {
         setError('root', { message: err?.message || 'Failed to create task' });
       },
       onSuccess: () => {

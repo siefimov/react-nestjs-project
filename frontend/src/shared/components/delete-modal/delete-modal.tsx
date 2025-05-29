@@ -18,7 +18,9 @@ export const DeleteModal: React.FC<Props> = ({
   if (!isModalOpen) return null;
 
   return (
-    <div className={styles['delete-modal__backdrop']}>
+    <div
+      className={`${styles['delete-modal']} ${styles['delete-modal__backdrop']} `}
+    >
       <div className={styles['delete-modal__content']}>
         <h3 className={styles['delete-modal__title']}>Delete Project</h3>
         <p>

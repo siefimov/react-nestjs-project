@@ -1,16 +1,16 @@
 import { apiClient } from './api-client';
-import { HTTP_METHODS } from '../../constants';
-type RequestMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+import { HTTP_METHODS } from '@/shared/constants';
+import type { RequestMethod } from '@/shared/types';
+import type { AxiosRequestConfig } from 'axios';
 
-interface RequestConfig {
+interface RequestConfig extends AxiosRequestConfig {
   withAuth?: boolean;
-  [key: string]: any;
 }
 
-async function request<T>(
+async function request<T, D>(
   url: string,
   method: RequestMethod = HTTP_METHODS.GET,
-  data: any = null,
+  data: D = undefined as unknown as D,
   config: RequestConfig = {},
 ): Promise<T> {
   const headers = { ...(config.headers || {}) };
@@ -35,13 +35,17 @@ async function request<T>(
 
 export const http = {
   get: <T>(url: string, config: RequestConfig = {}) =>
-    request<T>(url, HTTP_METHODS.GET, null, config),
-  post: <T>(url: string, data: any, config: RequestConfig = {}) =>
-    request<T>(url, HTTP_METHODS.POST, data, config),
-  put: <T>(url: string, data: any, config: RequestConfig = {}) =>
-    request<T>(url, HTTP_METHODS.PUT, data, config),
-  patch: <T>(url: string, data: any, config: RequestConfig = {}) =>
-    request<T>(url, HTTP_METHODS.PATCH, data, config),
+    request<T, undefined>(url, HTTP_METHODS.GET, undefined, config),
+
+  post: <T, D = unknown>(url: string, data: D, config: RequestConfig = {}) =>
+    request<T, D>(url, HTTP_METHODS.POST, data, config),
+
+  put: <T, D = unknown>(url: string, data: D, config: RequestConfig = {}) =>
+    request<T, D>(url, HTTP_METHODS.PUT, data, config),
+
+  patch: <T, D = unknown>(url: string, data: D, config: RequestConfig = {}) =>
+    request<T, D>(url, HTTP_METHODS.PATCH, data, config),
+
   delete: <T>(url: string, config: RequestConfig = {}) =>
-    request<T>(url, HTTP_METHODS.DELETE, null, config),
+    request<T, undefined>(url, HTTP_METHODS.DELETE, undefined, config),
 };

@@ -1,4 +1,4 @@
-import type { TaskStatus } from '../../shared/types';
+import type { TaskStatus } from '@/features/tasks';
 
 export const taskQueryKeys = {
   all: ['tasks'] as const,
