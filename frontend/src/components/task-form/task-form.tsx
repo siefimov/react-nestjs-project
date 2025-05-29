@@ -134,7 +134,7 @@ export const TaskForm: React.FC<Props> = ({ id }) => {
           )}
         </div>
         <button className={styles['task-form__button']} type="submit">
-          Create Task
+          Add Task
         </button>
       </div>
       {errors.root && (
