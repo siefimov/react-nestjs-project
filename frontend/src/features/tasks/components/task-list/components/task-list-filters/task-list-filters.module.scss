@@ -1,0 +1,42 @@
+@use '@/styles/_variables.scss' as *;
+
+.task-list__filters {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-xs $spacing-sm;
+  background: $color-bg-light;
+  border-radius: $radius;
+  box-shadow: 0 1px 4px 0 rgba(30, 41, 59, 0.04);
+  margin-bottom: $spacing-sm;
+
+  select,
+  input[type='number'] {
+    height: 40px;
+    padding: 0.4em 1.2em 0.4em 0.8em;
+    border: 1px solid $color-border;
+    border-radius: $radius;
+    background: $color-bg-alt;
+    color: $color-text;
+    font-size: $font-size-base;
+    font-family: $font-family-base;
+    transition: border-color $transition, box-shadow $transition;
+    outline: none;
+
+    &:focus {
+      border-color: $color-primary;
+      box-shadow: 0 0 0 2px rgba($color-primary, 0.15);
+    }
+  }
+
+  select {
+    min-width: 140px;
+    cursor: pointer;
+  }
+
+  input[type='number'] {
+    width: 70px;
+    min-width: 0;
+    text-align: center;
+  }
+}
