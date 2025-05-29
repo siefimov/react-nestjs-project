@@ -62,6 +62,9 @@ A simple project management web application for organizing projects and tasks. U
 
 ---
 
+> **Note**
+> You can set up application locally or with Docker and docker compose
+
 ## 🧰 Getting Started Locally
 
 ### Prerequisites
@@ -102,37 +105,33 @@ Create a `.env` file in the `backend` directory with the following content (edit
 **Database settings for Postgres and backend**
 
 ```
-POSTGRES_USER=your_name
-POSTGRES_PASSWORD=your_password
-POSTGRES_DB=db_title
+PORT=3000
 
-DB_HOST=postgres
+# Database settings
+DB_HOST=localhost
 DB_PORT=5432
-DB_USERNAME=your_name
+DB_USERNAME=postgres
 DB_PASSWORD=your_password
-DB_DATABASE=db_title
-```
+DB_DATABASE=postgres
 
-**JWT secret for backend**
-
-```
+# JWT settings
 JWT_SECRET=your_jwt_secret
 ```
-
-**Frontend API URL**
+Create a `.env` file in the `frontend` directory with the following content (edit as needed):
 
 ```
 VITE_API_URL=http://localhost:3000
 ```
 
-> **Note:**
->
-> - This `.env` file will be used by both Docker Compose and the backend service.
-> - **Do not commit your `.env` file to version control!** Add `.env` to your `.gitignore`.
+### 4. Start PostgreSQL
 
----
+If running locally (not via Docker), make sure your PostgreSQL server is running and a database named as in your `.env` (`db_title`) exists:
 
-### 4. Run Database Migrations
+```sh
+createdb <your_db_name>
+```
+
+### 5. Run Database Migrations
 
 Before running the application, apply database migrations to create all tables:
 
@@ -141,23 +140,14 @@ cd backend
 pnpm migration:run
 ```
 
-### 5. Seed the Database (optional, for demo data)
+### 6. Seed the Database (optional, for demo data)
 
 To insert demo data (admin user, demo project, demo tasks), run:
 
 ```sh
 pnpm seed
 ```
-
 ---
-
-### 6. Start PostgreSQL
-
-If running locally (not via Docker), make sure your PostgreSQL server is running and a database named as in your `.env` (`db_title`) exists:
-
-```sh
-createdb <your_db_name>
-```
 
 ### 7. Run the Application
 
@@ -186,7 +176,21 @@ If you prefer, you can run the entire stack using Docker and `docker compose`.
 
 ### Steps
 
-1. Create your `.env` file in the **project root** as described above.
+1. Create your `.env` file in the **project root** with the following content:
+```
+POSTGRES_USER=postgres_user_name
+POSTGRES_PASSWORD=your_password
+POSTGRES_DB=db_title
+
+DB_HOST=postgres
+DB_PORT=5432
+DB_USERNAME=postgres_user_name
+DB_PASSWORD=your_password
+DB_DATABASE=db_title
+
+VITE_API_URL=http://localhost:3000
+```
+
 2. From the project root, run:
 
    ```sh
@@ -201,7 +205,7 @@ If you prefer, you can run the entire stack using Docker and `docker compose`.
 
 ---
 
-3. RUn migration
+3. Run migration
 
 ```sh
 cd backend
