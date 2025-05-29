@@ -5,10 +5,10 @@ import {
   type ProjectResponseDto,
   type ProjectWithOwnerDto,
   ProjectCreateSchema,
-} from '../../schemas';
-import { http } from '../../shared/lib/api/http';
+} from '@/features';
+import { http } from '@/shared/lib/api/http';
 import { projectQueryKeys } from './project-query-keys';
-import { API_ROUTES } from '../../shared/constants';
+import { API_ROUTES } from '@/shared/constants';
 
 const createProjectFn = async (newPropect: ProjectCreateDto) => {
   const response = await http.post<ProjectResponseDto>(

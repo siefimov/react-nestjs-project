@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
-import { http } from '../../shared/lib/api/http';
 import { projectQueryKeys } from './project-query-keys';
-import { API_ROUTES } from '../../shared/constants';
+import { http } from '@/shared/lib/api';
+import { API_ROUTES } from '@/shared/constants';
 import { AxiosError } from 'axios';
 
 type Props = {

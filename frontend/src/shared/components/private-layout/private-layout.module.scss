@@ -1,0 +1,90 @@
+@use '@/styles/variables' as *;
+
+.app-layout__body {
+  display: flex;
+  flex-wrap: nowrap;
+  min-height: 60vh;
+  flex: 1 1 auto;
+}
+
+.app-layout__sidebar {
+  min-width: 220px;
+  max-width: 260px;
+  background: $color-bg;
+  border-radius: 0 $radius $radius 0;
+  box-shadow: 0 4px 24px 0 rgba(30, 41, 59, 0.06);
+  padding: $spacing-md 0 $spacing-md 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 350px;
+  margin-bottom: $spacing-xs;
+  transition: box-shadow $transition, background $transition;
+  height: calc(100vh - 2 * #{$spacing-lg});
+  position: relative;
+}
+
+.app-layout__nav {
+  width: 100%;
+}
+
+.app-layout__nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.app-layout__nav-item:not(:last-child) {
+  width: 100%;
+}
+
+.app-layout__nav-link {
+  display: flex;
+  align-items: center;
+  color: $color-primary;
+  text-decoration: none;
+  font-size: $font-size-base;
+  font-weight: 500;
+  padding: $spacing-sm $spacing-md;
+  transition: background $transition, color $transition, box-shadow $transition;
+  letter-spacing: 0.01em;
+  width: 100%;
+
+  &:hover,
+  &:focus,
+  &--active {
+    background: $color-primary-light;
+    color: $color-bg-alt;
+    box-shadow: 0 2px 8px 0 rgba(96, 165, 250, 0.1);
+    outline: none;
+  }
+}
+
+.app-layout__main {
+  flex: 1;
+  padding: 0;
+  padding: $spacing-md $spacing-lg;
+}
+
+@media (max-width: 900px) {
+  .app-layout__body {
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+  .app-layout__sidebar {
+    min-width: 0;
+    max-width: 100%;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+    margin-bottom: $spacing-sm;
+    padding: $spacing-sm $spacing-xs;
+    height: auto;
+    left: 0;
+    border-radius: $radius;
+  }
+  .app-layout__main {
+    padding: 0;
+  }
+}

@@ -1,9 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router';
-import { http } from '../../shared/lib/api/http';
+import { http } from '@/shared/lib/api';
 import { projectQueryKeys } from './project-query-keys';
-import { ProjectResponseSchema, type ProjectResponseDto } from '../../schemas';
-import { API_ROUTES } from '../../shared/constants';
+import {
+  ProjectResponseSchema,
+  type ProjectResponseDto,
+} from '@/features/projects';
+import { API_ROUTES } from '@/shared/constants';
 
 export const useProject = () => {
   const { id } = useParams();

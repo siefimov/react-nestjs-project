@@ -1,1 +1,1 @@
-export * from './use-sorted-items.hook';
+export { useSortedItems } from './use-sorted-items.hook';
