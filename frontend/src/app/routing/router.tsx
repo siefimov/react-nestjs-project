@@ -2,13 +2,12 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
-  RouterProvider,
 } from 'react-router';
-import { AppLayout, PrivateLayout, PrivateRoute } from '../components';
-import { Projects, Project, CreateProject, Login, Register } from '../views';
-import { APP_ROUTES } from '../constants';
+import { AppLayout, PrivateLayout, PrivateRoute } from '../../components';
+import { Projects, Project, CreateProject, Login, Register } from '../../views';
+import { APP_ROUTES } from '../../constants';
 
-const router = createBrowserRouter(
+export const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<AppLayout />}>
       <Route path={APP_ROUTES.LOGIN} element={<Login />} />
@@ -29,5 +28,3 @@ const router = createBrowserRouter(
     </Route>,
   ),
 );
-
-export const RoutingProvider = () => <RouterProvider router={router} />;
